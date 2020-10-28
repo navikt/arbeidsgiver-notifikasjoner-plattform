@@ -1,0 +1,21 @@
+apiVersion: kafka.nais.io/v1
+kind: Topic
+metadata:
+  name: arbeidsgiver-notifikasjon
+  namespace: arbeidsgiver
+  labels:
+    team: arbeidsgiver
+spec:
+  pool: nav-dev
+  config:  # optional; all fields are optional too; defaults shown
+    cleanupPolicy: delete, compact
+    minimumInSyncReplicas: 1
+    retentionBytes: -1
+    retentionHours: -1
+  acl:
+    - team: arbeidsgiver
+      application: arbeidsgiver-notifikasjon-service
+      access: readwrite   # read, write, readwrite
+    - team: arbeidsgiver
+      application: arbeidsgiver-notifikasjon-mock-sender
+      access: write
