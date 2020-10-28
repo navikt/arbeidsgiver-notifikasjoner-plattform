@@ -28,13 +28,10 @@ jobs:
           java-version: 11
 
       - name: Gjenopprett Maven-cache
-        working-directory: ./mockProducer
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('mockProducer/**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          key: ${{ runner.os }}-maven-${{ hashFiles('mockProducer/pom.xml') }}
 
       - name: Bygg og test med Maven
         working-directory: ./mockProducer
