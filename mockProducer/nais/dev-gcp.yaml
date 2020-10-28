@@ -1,0 +1,13 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: MockProducer
+  namespace: arbeidsgiver
+  labels:
+    team: arbeidsgiver
+spec:
+  image: {{ image }}
+  team: arbeidsgiver
+  port: 8080
+  kafka:
+    pool: nav-dev
