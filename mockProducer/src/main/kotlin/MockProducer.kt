@@ -22,6 +22,13 @@ fun Application.health() {
         get("/readiness") {
             call.respond(HttpStatusCode.OK)
         }
+
+        get("/hello") {
+            call.respond(
+                HttpStatusCode.OK,
+                System.getProperty("KAFKA_BROKERS") ?: "ikke funnet"
+            )
+        }
     }
 }
 

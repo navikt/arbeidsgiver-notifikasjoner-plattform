@@ -15,7 +15,7 @@
         <main.class>MockProducerKt</main.class>
         <kotlin.version>1.4.0</kotlin.version>
         <ktor.version>1.4.1</ktor.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
@@ -35,6 +35,16 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.30</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>6.4</version>
         </dependency>
 
         <!-- Avhengigheter for unit tests -->
