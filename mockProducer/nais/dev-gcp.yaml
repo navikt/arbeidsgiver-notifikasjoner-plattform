@@ -8,3 +8,5 @@ metadata:
 spec:
   image: {{ image }}
   team: arbeidsgiver
+  liveness.path: /liveness
+  readiness.path: /readiness

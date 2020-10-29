@@ -1,4 +1,27 @@
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    embeddedServer(
+        Netty,
+        port = 8080,
+        module = Application::health
+    ).start()
+}
+
+fun Application.health() {
+    routing {
+        get("/liveness") {
+            call.respond(HttpStatusCode.OK)
+        }
+
+        get("/readiness") {
+            call.respond(HttpStatusCode.OK)
+        }
+    }
 }
 
