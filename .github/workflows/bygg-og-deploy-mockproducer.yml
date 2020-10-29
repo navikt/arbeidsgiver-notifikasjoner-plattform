@@ -1,6 +1,7 @@
 name: Bygg og deploy mockproducer
 
-on.push:
+on:
+  push:
     branches: ['main']
     paths: ['mockProducer/**']
 
