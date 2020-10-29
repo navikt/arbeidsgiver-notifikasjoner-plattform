@@ -8,6 +8,3 @@ metadata:
 spec:
   image: {{ image }}
   team: arbeidsgiver
-  port: 8080
-  kafka:
-    pool: nav-dev
