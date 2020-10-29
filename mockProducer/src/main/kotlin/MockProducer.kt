@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
         Netty,
         port = 8080,
         module = Application::health
-    ).start()
+    ).start(wait = true)
 }
 
 fun Application.health() {
