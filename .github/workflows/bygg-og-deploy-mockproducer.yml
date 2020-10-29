@@ -1,9 +1,8 @@
-name: Bygg og deploy master
+name: Bygg og deploy mockproducer
 
-on:
-  push:
-    branches:
-      - 'main'
+on.push:
+    branches: ['main']
+    paths: ['mockProducer/**']
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
