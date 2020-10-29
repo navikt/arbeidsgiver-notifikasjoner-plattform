@@ -1,2 +1,2 @@
 FROM navikt/java:11
-COPY /target/MockProducer-0.0.1-SNAPSHOT.jar app.jar
+COPY /target/MockProducer-0.0.1-SNAPSHOT-jar-with-dependencies.jar app.jar
