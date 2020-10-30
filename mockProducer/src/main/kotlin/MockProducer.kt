@@ -4,6 +4,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import PRODUCER.send
 
 fun main(args: Array<String>) {
     embeddedServer(
@@ -24,9 +25,10 @@ fun Application.health() {
         }
 
         get("/hello") {
+            send("HEISANN KAFKA!")
             call.respond(
                 HttpStatusCode.OK,
-                System.getProperty("KAFKA_BROKERS") ?: "ikke funnet"
+                "Melding puttet på kafka"
             )
         }
     }
