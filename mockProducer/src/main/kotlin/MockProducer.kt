@@ -9,7 +9,7 @@ import PRODUCER.send
 fun main(args: Array<String>) {
     embeddedServer(
         Netty,
-        port = 8080,
+        port = 8081,
         module = Application::health
     ).start(wait = true)
 }
