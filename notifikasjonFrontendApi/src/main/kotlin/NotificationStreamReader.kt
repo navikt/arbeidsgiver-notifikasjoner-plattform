@@ -3,6 +3,7 @@ import org.apache.kafka.common.serialization.StringSerializer
 import java.util.*
 
 fun lagKafkaConsumer(): KafkaConsumer<String, String> {
+
     val props = Properties()
     props["bootstrap.servers"] = System.getenv("KAFKA_BROKERS") ?: ""
     props["key.serializer"] = StringSerializer::class.java.canonicalName
