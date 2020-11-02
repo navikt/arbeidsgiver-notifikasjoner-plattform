@@ -58,7 +58,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: mockProducer/nais/dev-gcp.yaml
+          RESOURCE: notifikasjonFrontendApi/nais/dev-gcp.yaml
           PRINT_PAYLOAD: true
 
  # deploy-prod:
