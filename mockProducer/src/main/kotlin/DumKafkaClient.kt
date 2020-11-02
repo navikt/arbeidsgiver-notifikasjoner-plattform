@@ -27,8 +27,8 @@ object PRODUCER {
         throw e
     }
 
-    fun send(msg:String){
+    fun send(msg:String) {
         logger.info("send({}): producer={}", msg, producer)
-        producer.send(ProducerRecord("arbeidsgiver-notifikasjon", msg))
+        producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon", msg))
     }
 }
