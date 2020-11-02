@@ -14,7 +14,7 @@ private fun createProducer(): Producer<String, String> {
     props["ssl.keystore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
     props["ssl.truststore.location"] = System.getenv("KAFKA_TRUSTSTORE_PATH") ?: ""
     props["ssl.truststore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
-    props["security.protocol"] = System.getenv("SSL") ?: ""
+    props["security.protocol"] = "SSL"
     return KafkaProducer(props)
 }
 
