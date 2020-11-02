@@ -16,3 +16,6 @@ spec:
     - team: arbeidsgiver
       application: mockproducer
       access: readwrite
+    - team: arbeidsgiver
+      application: notifikasjon-frontend-api
+      access: read
