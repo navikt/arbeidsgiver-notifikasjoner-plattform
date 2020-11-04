@@ -8,7 +8,7 @@ import no.nav.arbeidsgiver.notifikasjon.config.DataSourceBuilder
 import org.slf4j.LoggerFactory
 
 
-fun main(args: Array<String>) {
+fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
     val logger = LoggerFactory.getLogger("main")!!
     try {
         val config = DataSourceBuilder(System.getenv())
@@ -18,8 +18,7 @@ fun main(args: Array<String>) {
                 port = 8080,
                 module = Application::health
         ).start(wait = true)
-    }
-    catch (e: Exception) {
+    } catch (e: Exception) {
         logger.error("uhåndtert exception", e)
     }
 }

@@ -3,14 +3,23 @@ package no.nav.arbeidsgiver.notifikasjon.config
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.flywaydb.core.Flyway
+import java.lang.RuntimeException
 import javax.sql.DataSource
 
 
 // Understands how to create a data source from environment variables
-public class DataSourceBuilder(env: Map<String, String>) {
+class DataSourceBuilder(val env: Map<String, String>) {
+
+    private fun hentEnvVariabel(variabel: String): String =
+            env["NAIS_DATABASE_NOTIFIKASJON_FRONTEND_API_NOTIFIKASJONER_${variabel}"]
+            ?: throw RuntimeException("Finner ikke env-variabel");
+
+    val url = "jdbc:postgres://${hentEnvVariabel("HOST")}:${hentEnvVariabel("PORT")}/${hentEnvVariabel("DATABASE")}"
 
     private val hikariConfig = HikariConfig().apply {
-        jdbcUrl = env["NAIS_DATABASE_NOTIFIKASJON_FRONTEND_API_NOTIFIKASJONER_URL"]
+        jdbcUrl = url
+        username = hentEnvVariabel("USERNAME")
+        password = hentEnvVariabel("PASSWORD")
         maximumPoolSize = 3
         minimumIdle = 1
         idleTimeout = 10001
@@ -22,7 +31,7 @@ public class DataSourceBuilder(env: Map<String, String>) {
       return HikariDataSource(hikariConfig)
     }
 
-    public fun migrate() =
+    fun migrate() =
             Flyway.configure()
                     .dataSource(getDataSource())
                     .load()
