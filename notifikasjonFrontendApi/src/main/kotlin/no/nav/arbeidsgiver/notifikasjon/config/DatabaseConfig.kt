@@ -14,7 +14,7 @@ class DataSourceBuilder(val env: Map<String, String>) {
             env["NAIS_DATABASE_NOTIFIKASJON_FRONTEND_API_NOTIFIKASJONER_${variabel}"]
             ?: throw RuntimeException("Finner ikke env-variabel");
 
-    val url = "jdbc:postgres://${hentEnvVariabel("HOST")}:${hentEnvVariabel("PORT")}/${hentEnvVariabel("DATABASE")}"
+    val url = "jdbc:postgresql://${hentEnvVariabel("HOST")}:${hentEnvVariabel("PORT")}/${hentEnvVariabel("DATABASE")}"
 
     private val hikariConfig = HikariConfig().apply {
         jdbcUrl = url
