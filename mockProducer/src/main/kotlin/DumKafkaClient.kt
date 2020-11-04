@@ -15,11 +15,13 @@ private fun createProducer(): Producer<String, String> {
     props["ssl.truststore.location"] = System.getenv("KAFKA_TRUSTSTORE_PATH") ?: ""
     props["ssl.truststore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
     props["security.protocol"] = "SSL"
+    props["schema.registry.url"] = System.getenv("KAFKA_SCHEMA_REGISTRY");
     return KafkaProducer(props)
 }
 
 object PRODUCER {
     var logger = LoggerFactory.getLogger("PRODUCER")!!
+
     var producer: Producer<String, String> = try {
         createProducer()
     } catch (e: Exception) {
@@ -30,5 +32,6 @@ object PRODUCER {
     fun send(msg:String) {
         logger.info("send({}): producer={}", msg, producer)
         producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon", msg))
+
     }
 }
