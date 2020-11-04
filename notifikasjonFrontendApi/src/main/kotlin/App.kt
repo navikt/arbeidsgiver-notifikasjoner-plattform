@@ -4,8 +4,13 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import no.nav.arbeidsgiver.notifikasjon.config.DataSourceBuilder
+
 
 fun main(args: Array<String>) {
+
+    var config = DataSourceBuilder(System.getenv())
+    config.migrate()
     embeddedServer(
         Netty,
         port = 8080,
