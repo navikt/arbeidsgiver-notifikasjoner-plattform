@@ -10,7 +10,7 @@ import javax.sql.DataSource
 public class DataSourceBuilder(env: Map<String, String>) {
 
     private val hikariConfig = HikariConfig().apply {
-        jdbcUrl = env["NAIS_DATABASE_MYAPP_MYDB_URL"]
+        jdbcUrl = env["NAIS_DATABASE_NOTIFIKASJON_FRONTEND_API_NOTIFIKASJONER_URL"]
         maximumPoolSize = 3
         minimumIdle = 1
         idleTimeout = 10001

@@ -5,17 +5,23 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import no.nav.arbeidsgiver.notifikasjon.config.DataSourceBuilder
+import org.slf4j.LoggerFactory
 
 
 fun main(args: Array<String>) {
-
-    var config = DataSourceBuilder(System.getenv())
-    config.migrate()
-    embeddedServer(
-        Netty,
-        port = 8080,
-        module = Application::health
-    ).start(wait = true)
+    val logger = LoggerFactory.getLogger("main")!!
+    try {
+        val config = DataSourceBuilder(System.getenv())
+        config.migrate()
+        embeddedServer(
+                Netty,
+                port = 8080,
+                module = Application::health
+        ).start(wait = true)
+    }
+    catch (e: Exception) {
+        logger.error("uhåndtert exception", e)
+    }
 }
 
 fun Application.health() {
