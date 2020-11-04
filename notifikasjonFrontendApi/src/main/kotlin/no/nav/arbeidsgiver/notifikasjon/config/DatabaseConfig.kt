@@ -25,6 +25,7 @@ class DataSourceBuilder(val env: Map<String, String>) {
         idleTimeout = 10001
         connectionTimeout = 1000
         maxLifetime = 30001
+        driverClassName = "org.postgresql.Driver"
     }
 
     fun getDataSource(): DataSource {
