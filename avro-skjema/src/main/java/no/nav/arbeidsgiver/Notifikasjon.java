@@ -3,6 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
+package no.nav.arbeidsgiver;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -13,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -3511689183878028856L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Notifikasjon\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"beskjeder\",\"type\":\"string\"},{\"name\":\"orgnr\",\"type\":\"string\"},{\"name\":\"servicecode\",\"type\":\"string\"},{\"name\":\"serviceedition\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = -3918548911033760720L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Notifikasjon\",\"namespace\":\"no.nav.arbeidsgiver\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"beskjed\",\"type\":\"string\"},{\"name\":\"orgnr\",\"type\":\"string\"},{\"name\":\"servicecode\",\"type\":\"string\"},{\"name\":\"serviceedition\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -71,10 +72,10 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   }
 
    private java.lang.CharSequence id;
-   private java.lang.CharSequence beskjeder;
+   private java.lang.CharSequence beskjed;
    private java.lang.CharSequence orgnr;
    private java.lang.CharSequence servicecode;
-   private java.lang.CharSequence serviceedition;
+   private int serviceedition;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -86,14 +87,14 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   /**
    * All-args constructor.
    * @param id The new value for id
-   * @param beskjeder The new value for beskjeder
+   * @param beskjed The new value for beskjed
    * @param orgnr The new value for orgnr
    * @param servicecode The new value for servicecode
    * @param serviceedition The new value for serviceedition
    */
-  public Notifikasjon(java.lang.CharSequence id, java.lang.CharSequence beskjeder, java.lang.CharSequence orgnr, java.lang.CharSequence servicecode, java.lang.CharSequence serviceedition) {
+  public Notifikasjon(java.lang.CharSequence id, java.lang.CharSequence beskjed, java.lang.CharSequence orgnr, java.lang.CharSequence servicecode, java.lang.Integer serviceedition) {
     this.id = id;
-    this.beskjeder = beskjeder;
+    this.beskjed = beskjed;
     this.orgnr = orgnr;
     this.servicecode = servicecode;
     this.serviceedition = serviceedition;
@@ -105,7 +106,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return beskjeder;
+    case 1: return beskjed;
     case 2: return orgnr;
     case 3: return servicecode;
     case 4: return serviceedition;
@@ -118,10 +119,10 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = (java.lang.CharSequence)value$; break;
-    case 1: beskjeder = (java.lang.CharSequence)value$; break;
+    case 1: beskjed = (java.lang.CharSequence)value$; break;
     case 2: orgnr = (java.lang.CharSequence)value$; break;
     case 3: servicecode = (java.lang.CharSequence)value$; break;
-    case 4: serviceedition = (java.lang.CharSequence)value$; break;
+    case 4: serviceedition = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -144,20 +145,20 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   }
 
   /**
-   * Gets the value of the 'beskjeder' field.
-   * @return The value of the 'beskjeder' field.
+   * Gets the value of the 'beskjed' field.
+   * @return The value of the 'beskjed' field.
    */
-  public java.lang.CharSequence getBeskjeder() {
-    return beskjeder;
+  public java.lang.CharSequence getBeskjed() {
+    return beskjed;
   }
 
 
   /**
-   * Sets the value of the 'beskjeder' field.
+   * Sets the value of the 'beskjed' field.
    * @param value the value to set.
    */
-  public void setBeskjeder(java.lang.CharSequence value) {
-    this.beskjeder = value;
+  public void setBeskjed(java.lang.CharSequence value) {
+    this.beskjed = value;
   }
 
   /**
@@ -198,7 +199,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * Gets the value of the 'serviceedition' field.
    * @return The value of the 'serviceedition' field.
    */
-  public java.lang.CharSequence getServiceedition() {
+  public int getServiceedition() {
     return serviceedition;
   }
 
@@ -207,7 +208,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'serviceedition' field.
    * @param value the value to set.
    */
-  public void setServiceedition(java.lang.CharSequence value) {
+  public void setServiceedition(int value) {
     this.serviceedition = value;
   }
 
@@ -215,8 +216,8 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * Creates a new Notifikasjon RecordBuilder.
    * @return A new Notifikasjon RecordBuilder
    */
-  public static Notifikasjon.Builder newBuilder() {
-    return new Notifikasjon.Builder();
+  public static no.nav.arbeidsgiver.Notifikasjon.Builder newBuilder() {
+    return new no.nav.arbeidsgiver.Notifikasjon.Builder();
   }
 
   /**
@@ -224,11 +225,11 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * @param other The existing builder to copy.
    * @return A new Notifikasjon RecordBuilder
    */
-  public static Notifikasjon.Builder newBuilder(Notifikasjon.Builder other) {
+  public static no.nav.arbeidsgiver.Notifikasjon.Builder newBuilder(no.nav.arbeidsgiver.Notifikasjon.Builder other) {
     if (other == null) {
-      return new Notifikasjon.Builder();
+      return new no.nav.arbeidsgiver.Notifikasjon.Builder();
     } else {
-      return new Notifikasjon.Builder(other);
+      return new no.nav.arbeidsgiver.Notifikasjon.Builder(other);
     }
   }
 
@@ -237,11 +238,11 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * @param other The existing instance to copy.
    * @return A new Notifikasjon RecordBuilder
    */
-  public static Notifikasjon.Builder newBuilder(Notifikasjon other) {
+  public static no.nav.arbeidsgiver.Notifikasjon.Builder newBuilder(no.nav.arbeidsgiver.Notifikasjon other) {
     if (other == null) {
-      return new Notifikasjon.Builder();
+      return new no.nav.arbeidsgiver.Notifikasjon.Builder();
     } else {
-      return new Notifikasjon.Builder(other);
+      return new no.nav.arbeidsgiver.Notifikasjon.Builder(other);
     }
   }
 
@@ -253,10 +254,10 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     implements org.apache.avro.data.RecordBuilder<Notifikasjon> {
 
     private java.lang.CharSequence id;
-    private java.lang.CharSequence beskjeder;
+    private java.lang.CharSequence beskjed;
     private java.lang.CharSequence orgnr;
     private java.lang.CharSequence servicecode;
-    private java.lang.CharSequence serviceedition;
+    private int serviceedition;
 
     /** Creates a new Builder */
     private Builder() {
@@ -267,14 +268,14 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(Notifikasjon.Builder other) {
+    private Builder(no.nav.arbeidsgiver.Notifikasjon.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.beskjeder)) {
-        this.beskjeder = data().deepCopy(fields()[1].schema(), other.beskjeder);
+      if (isValidValue(fields()[1], other.beskjed)) {
+        this.beskjed = data().deepCopy(fields()[1].schema(), other.beskjed);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
       if (isValidValue(fields()[2], other.orgnr)) {
@@ -295,14 +296,14 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
      * Creates a Builder by copying an existing Notifikasjon instance
      * @param other The existing instance to copy.
      */
-    private Builder(Notifikasjon other) {
+    private Builder(no.nav.arbeidsgiver.Notifikasjon other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.beskjeder)) {
-        this.beskjeder = data().deepCopy(fields()[1].schema(), other.beskjeder);
+      if (isValidValue(fields()[1], other.beskjed)) {
+        this.beskjed = data().deepCopy(fields()[1].schema(), other.beskjed);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.orgnr)) {
@@ -333,7 +334,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public Notifikasjon.Builder setId(java.lang.CharSequence value) {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -353,48 +354,48 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public Notifikasjon.Builder clearId() {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'beskjeder' field.
+      * Gets the value of the 'beskjed' field.
       * @return The value.
       */
-    public java.lang.CharSequence getBeskjeder() {
-      return beskjeder;
+    public java.lang.CharSequence getBeskjed() {
+      return beskjed;
     }
 
 
     /**
-      * Sets the value of the 'beskjeder' field.
-      * @param value The value of 'beskjeder'.
+      * Sets the value of the 'beskjed' field.
+      * @param value The value of 'beskjed'.
       * @return This builder.
       */
-    public Notifikasjon.Builder setBeskjeder(java.lang.CharSequence value) {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder setBeskjed(java.lang.CharSequence value) {
       validate(fields()[1], value);
-      this.beskjeder = value;
+      this.beskjed = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'beskjeder' field has been set.
-      * @return True if the 'beskjeder' field has been set, false otherwise.
+      * Checks whether the 'beskjed' field has been set.
+      * @return True if the 'beskjed' field has been set, false otherwise.
       */
-    public boolean hasBeskjeder() {
+    public boolean hasBeskjed() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'beskjeder' field.
+      * Clears the value of the 'beskjed' field.
       * @return This builder.
       */
-    public Notifikasjon.Builder clearBeskjeder() {
-      beskjeder = null;
+    public no.nav.arbeidsgiver.Notifikasjon.Builder clearBeskjed() {
+      beskjed = null;
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -413,7 +414,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'orgnr'.
       * @return This builder.
       */
-    public Notifikasjon.Builder setOrgnr(java.lang.CharSequence value) {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder setOrgnr(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.orgnr = value;
       fieldSetFlags()[2] = true;
@@ -433,7 +434,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'orgnr' field.
       * @return This builder.
       */
-    public Notifikasjon.Builder clearOrgnr() {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder clearOrgnr() {
       orgnr = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -453,7 +454,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'servicecode'.
       * @return This builder.
       */
-    public Notifikasjon.Builder setServicecode(java.lang.CharSequence value) {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder setServicecode(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.servicecode = value;
       fieldSetFlags()[3] = true;
@@ -473,7 +474,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'servicecode' field.
       * @return This builder.
       */
-    public Notifikasjon.Builder clearServicecode() {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder clearServicecode() {
       servicecode = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -483,7 +484,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * Gets the value of the 'serviceedition' field.
       * @return The value.
       */
-    public java.lang.CharSequence getServiceedition() {
+    public int getServiceedition() {
       return serviceedition;
     }
 
@@ -493,7 +494,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'serviceedition'.
       * @return This builder.
       */
-    public Notifikasjon.Builder setServiceedition(java.lang.CharSequence value) {
+    public no.nav.arbeidsgiver.Notifikasjon.Builder setServiceedition(int value) {
       validate(fields()[4], value);
       this.serviceedition = value;
       fieldSetFlags()[4] = true;
@@ -513,8 +514,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'serviceedition' field.
       * @return This builder.
       */
-    public Notifikasjon.Builder clearServiceedition() {
-      serviceedition = null;
+    public no.nav.arbeidsgiver.Notifikasjon.Builder clearServiceedition() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -525,10 +525,10 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       try {
         Notifikasjon record = new Notifikasjon();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.beskjeder = fieldSetFlags()[1] ? this.beskjeder : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.beskjed = fieldSetFlags()[1] ? this.beskjed : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.orgnr = fieldSetFlags()[2] ? this.orgnr : (java.lang.CharSequence) defaultValue(fields()[2]);
         record.servicecode = fieldSetFlags()[3] ? this.servicecode : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.serviceedition = fieldSetFlags()[4] ? this.serviceedition : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.serviceedition = fieldSetFlags()[4] ? this.serviceedition : (java.lang.Integer) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -563,13 +563,13 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   {
     out.writeString(this.id);
 
-    out.writeString(this.beskjeder);
+    out.writeString(this.beskjed);
 
     out.writeString(this.orgnr);
 
     out.writeString(this.servicecode);
 
-    out.writeString(this.serviceedition);
+    out.writeInt(this.serviceedition);
 
   }
 
@@ -580,13 +580,13 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     if (fieldOrder == null) {
       this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
 
-      this.beskjeder = in.readString(this.beskjeder instanceof Utf8 ? (Utf8)this.beskjeder : null);
+      this.beskjed = in.readString(this.beskjed instanceof Utf8 ? (Utf8)this.beskjed : null);
 
       this.orgnr = in.readString(this.orgnr instanceof Utf8 ? (Utf8)this.orgnr : null);
 
       this.servicecode = in.readString(this.servicecode instanceof Utf8 ? (Utf8)this.servicecode : null);
 
-      this.serviceedition = in.readString(this.serviceedition instanceof Utf8 ? (Utf8)this.serviceedition : null);
+      this.serviceedition = in.readInt();
 
     } else {
       for (int i = 0; i < 5; i++) {
@@ -596,7 +596,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
           break;
 
         case 1:
-          this.beskjeder = in.readString(this.beskjeder instanceof Utf8 ? (Utf8)this.beskjeder : null);
+          this.beskjed = in.readString(this.beskjed instanceof Utf8 ? (Utf8)this.beskjed : null);
           break;
 
         case 2:
@@ -608,7 +608,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
           break;
 
         case 4:
-          this.serviceedition = in.readString(this.serviceedition instanceof Utf8 ? (Utf8)this.serviceedition : null);
+          this.serviceedition = in.readInt();
           break;
 
         default:

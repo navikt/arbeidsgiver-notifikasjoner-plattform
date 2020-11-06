@@ -1,10 +1,11 @@
 {"type": "record",
   "name": "Notifikasjon",
+  "namespace": "no.nav.arbeidsgiver",
   "fields": [
     {"name": "id", "type": "string"},
-    {"name": "beskjeder", "type": "string"},
+    {"name": "beskjed", "type": "string"},
     {"name": "orgnr", "type": "string"},
     {"name": "servicecode", "type": "string"},
-    {"name": "serviceedition", "type": "string"}
+    {"name": "serviceedition", "type": "int"}
   ]
 }

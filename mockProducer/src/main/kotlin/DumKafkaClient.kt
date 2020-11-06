@@ -1,3 +1,5 @@
+import io.confluent.kafka.serializers.KafkaAvroSerializer
+import no.nav.arbeidsgiver.Notifikasjon
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
@@ -5,11 +7,11 @@ import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
 import java.util.*
 
-private fun createProducer(): Producer<String, String> {
+private fun createProducer(): Producer<String, Notifikasjon> {
     val props = Properties()
     props["bootstrap.servers"] = System.getenv("KAFKA_BROKERS") ?: ""
     props["key.serializer"] = StringSerializer::class.java.canonicalName
-    props["value.serializer"] = StringSerializer::class.java.canonicalName
+    props["value.serializer"] = KafkaAvroSerializer::class.java.canonicalName
     props["ssl.keystore.location"] = System.getenv("KAFKA_KEYSTORE_PATH") ?: ""
     props["ssl.keystore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
     props["ssl.truststore.location"] = System.getenv("KAFKA_TRUSTSTORE_PATH") ?: ""
@@ -22,7 +24,7 @@ private fun createProducer(): Producer<String, String> {
 object PRODUCER {
     var logger = LoggerFactory.getLogger("PRODUCER")!!
 
-    var producer: Producer<String, String> = try {
+    var producer: Producer<String, Notifikasjon> = try {
         createProducer()
     } catch (e: Exception) {
         logger.error("Konstruksjon av producer feilet", e)
@@ -30,8 +32,14 @@ object PRODUCER {
     }
 
     fun send(msg:String) {
+        var notifikasjon=Notifikasjon()
+        notifikasjon.id=UUID.randomUUID().toString()
+        notifikasjon.orgnr="910825526"
+        notifikasjon.servicecode="5441"
+        notifikasjon.serviceedition=1
+        notifikasjon.beskjed="msg"
         logger.info("send({}): producer={}", msg, producer)
-        producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon", msg))
+        producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon",notifikasjon.id.toString(), notifikasjon))
 
     }
 }
