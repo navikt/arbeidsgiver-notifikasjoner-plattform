@@ -5,6 +5,8 @@ import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
+import java.net.URI
+import java.net.URL
 import java.util.*
 
 private fun createProducer(): Producer<String, Notifikasjon> {
@@ -17,7 +19,20 @@ private fun createProducer(): Producer<String, Notifikasjon> {
     props["ssl.truststore.location"] = System.getenv("KAFKA_TRUSTSTORE_PATH") ?: ""
     props["ssl.truststore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
     props["security.protocol"] = "SSL"
-    props["schema.registry.url"] = System.getenv("KAFKA_SCHEMA_REGISTRY");
+
+    val schemaRegistry = URL(System.getenv("KAFKA_SCHEMA_REGISTRY"))
+    props["basic.auth.credentials.source"] = "USER_INFO"
+    props["basic.auth.user.info"] = schemaRegistry.userInfo
+    props["schema.registry.url"] = URI(
+        schemaRegistry.protocol,
+        null,
+        schemaRegistry.host,
+        schemaRegistry.port,
+        schemaRegistry.path,
+        schemaRegistry.query,
+        schemaRegistry.ref
+    ).toString()
+
     return KafkaProducer(props)
 }
 
