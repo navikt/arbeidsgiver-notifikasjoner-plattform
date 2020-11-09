@@ -47,7 +47,7 @@ object PRODUCER {
     }
 
     fun send(msg:String) {
-        var notifikasjon=Notifikasjon()
+        val notifikasjon=Notifikasjon()
         notifikasjon.id=UUID.randomUUID().toString()
         notifikasjon.orgnr="910825526"
         notifikasjon.servicecode="5441"
