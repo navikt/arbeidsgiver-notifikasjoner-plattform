@@ -5,77 +5,19 @@
  */
 package no.nav.arbeidsgiver;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.SchemaStore;
 
+@SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = -3918548911033760720L;
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Notifikasjon\",\"namespace\":\"no.nav.arbeidsgiver\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"beskjed\",\"type\":\"string\"},{\"name\":\"orgnr\",\"type\":\"string\"},{\"name\":\"servicecode\",\"type\":\"string\"},{\"name\":\"serviceedition\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-
-  private static SpecificData MODEL$ = new SpecificData();
-
-  private static final BinaryMessageEncoder<Notifikasjon> ENCODER =
-      new BinaryMessageEncoder<Notifikasjon>(MODEL$, SCHEMA$);
-
-  private static final BinaryMessageDecoder<Notifikasjon> DECODER =
-      new BinaryMessageDecoder<Notifikasjon>(MODEL$, SCHEMA$);
-
-  /**
-   * Return the BinaryMessageEncoder instance used by this class.
-   * @return the message encoder used by this class
-   */
-  public static BinaryMessageEncoder<Notifikasjon> getEncoder() {
-    return ENCODER;
-  }
-
-  /**
-   * Return the BinaryMessageDecoder instance used by this class.
-   * @return the message decoder used by this class
-   */
-  public static BinaryMessageDecoder<Notifikasjon> getDecoder() {
-    return DECODER;
-  }
-
-  /**
-   * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
-   * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
-   * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
-   */
-  public static BinaryMessageDecoder<Notifikasjon> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<Notifikasjon>(MODEL$, SCHEMA$, resolver);
-  }
-
-  /**
-   * Serializes this Notifikasjon to a ByteBuffer.
-   * @return a buffer holding the serialized data for this instance
-   * @throws java.io.IOException if this instance could not be serialized
-   */
-  public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
-    return ENCODER.encode(this);
-  }
-
-  /**
-   * Deserializes a Notifikasjon from a ByteBuffer.
-   * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a Notifikasjon instance decoded from the given buffer
-   * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
-   */
-  public static Notifikasjon fromByteBuffer(
-      java.nio.ByteBuffer b) throws java.io.IOException {
-    return DECODER.decode(b);
-  }
-
-   private java.lang.CharSequence id;
-   private java.lang.CharSequence beskjed;
-   private java.lang.CharSequence orgnr;
-   private java.lang.CharSequence servicecode;
-   private int serviceedition;
+  @Deprecated public java.lang.CharSequence id;
+  @Deprecated public java.lang.CharSequence beskjed;
+  @Deprecated public java.lang.CharSequence orgnr;
+  @Deprecated public java.lang.CharSequence servicecode;
+  @Deprecated public int serviceedition;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -100,7 +42,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     this.serviceedition = serviceedition;
   }
 
-  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
@@ -110,7 +51,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     case 2: return orgnr;
     case 3: return servicecode;
     case 4: return serviceedition;
-    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
+    default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
 
@@ -123,7 +64,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     case 2: orgnr = (java.lang.CharSequence)value$; break;
     case 3: servicecode = (java.lang.CharSequence)value$; break;
     case 4: serviceedition = (java.lang.Integer)value$; break;
-    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
+    default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
 
@@ -134,7 +75,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   public java.lang.CharSequence getId() {
     return id;
   }
-
 
   /**
    * Sets the value of the 'id' field.
@@ -152,7 +92,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     return beskjed;
   }
 
-
   /**
    * Sets the value of the 'beskjed' field.
    * @param value the value to set.
@@ -168,7 +107,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
   public java.lang.CharSequence getOrgnr() {
     return orgnr;
   }
-
 
   /**
    * Sets the value of the 'orgnr' field.
@@ -186,7 +124,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     return servicecode;
   }
 
-
   /**
    * Sets the value of the 'servicecode' field.
    * @param value the value to set.
@@ -199,16 +136,15 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * Gets the value of the 'serviceedition' field.
    * @return The value of the 'serviceedition' field.
    */
-  public int getServiceedition() {
+  public java.lang.Integer getServiceedition() {
     return serviceedition;
   }
-
 
   /**
    * Sets the value of the 'serviceedition' field.
    * @param value the value to set.
    */
-  public void setServiceedition(int value) {
+  public void setServiceedition(java.lang.Integer value) {
     this.serviceedition = value;
   }
 
@@ -226,11 +162,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * @return A new Notifikasjon RecordBuilder
    */
   public static no.nav.arbeidsgiver.Notifikasjon.Builder newBuilder(no.nav.arbeidsgiver.Notifikasjon.Builder other) {
-    if (other == null) {
-      return new no.nav.arbeidsgiver.Notifikasjon.Builder();
-    } else {
-      return new no.nav.arbeidsgiver.Notifikasjon.Builder(other);
-    }
+    return new no.nav.arbeidsgiver.Notifikasjon.Builder(other);
   }
 
   /**
@@ -239,17 +171,12 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
    * @return A new Notifikasjon RecordBuilder
    */
   public static no.nav.arbeidsgiver.Notifikasjon.Builder newBuilder(no.nav.arbeidsgiver.Notifikasjon other) {
-    if (other == null) {
-      return new no.nav.arbeidsgiver.Notifikasjon.Builder();
-    } else {
-      return new no.nav.arbeidsgiver.Notifikasjon.Builder(other);
-    }
+    return new no.nav.arbeidsgiver.Notifikasjon.Builder(other);
   }
 
   /**
    * RecordBuilder for Notifikasjon instances.
    */
-  @org.apache.avro.specific.AvroGenerated
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Notifikasjon>
     implements org.apache.avro.data.RecordBuilder<Notifikasjon> {
 
@@ -272,23 +199,23 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
-        fieldSetFlags()[0] = other.fieldSetFlags()[0];
+        fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.beskjed)) {
         this.beskjed = data().deepCopy(fields()[1].schema(), other.beskjed);
-        fieldSetFlags()[1] = other.fieldSetFlags()[1];
+        fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.orgnr)) {
         this.orgnr = data().deepCopy(fields()[2].schema(), other.orgnr);
-        fieldSetFlags()[2] = other.fieldSetFlags()[2];
+        fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.servicecode)) {
         this.servicecode = data().deepCopy(fields()[3].schema(), other.servicecode);
-        fieldSetFlags()[3] = other.fieldSetFlags()[3];
+        fieldSetFlags()[3] = true;
       }
       if (isValidValue(fields()[4], other.serviceedition)) {
         this.serviceedition = data().deepCopy(fields()[4].schema(), other.serviceedition);
-        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -297,7 +224,7 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
      * @param other The existing instance to copy.
      */
     private Builder(no.nav.arbeidsgiver.Notifikasjon other) {
-      super(SCHEMA$);
+            super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
@@ -327,7 +254,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     public java.lang.CharSequence getId() {
       return id;
     }
-
 
     /**
       * Sets the value of the 'id' field.
@@ -368,7 +294,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       return beskjed;
     }
 
-
     /**
       * Sets the value of the 'beskjed' field.
       * @param value The value of 'beskjed'.
@@ -407,7 +332,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     public java.lang.CharSequence getOrgnr() {
       return orgnr;
     }
-
 
     /**
       * Sets the value of the 'orgnr' field.
@@ -448,7 +372,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       return servicecode;
     }
 
-
     /**
       * Sets the value of the 'servicecode' field.
       * @param value The value of 'servicecode'.
@@ -484,10 +407,9 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
       * Gets the value of the 'serviceedition' field.
       * @return The value.
       */
-    public int getServiceedition() {
+    public java.lang.Integer getServiceedition() {
       return serviceedition;
     }
-
 
     /**
       * Sets the value of the 'serviceedition' field.
@@ -520,7 +442,6 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Notifikasjon build() {
       try {
         Notifikasjon record = new Notifikasjon();
@@ -530,101 +451,26 @@ public class Notifikasjon extends org.apache.avro.specific.SpecificRecordBase im
         record.servicecode = fieldSetFlags()[3] ? this.servicecode : (java.lang.CharSequence) defaultValue(fields()[3]);
         record.serviceedition = fieldSetFlags()[4] ? this.serviceedition : (java.lang.Integer) defaultValue(fields()[4]);
         return record;
-      } catch (org.apache.avro.AvroMissingFieldException e) {
-        throw e;
-      } catch (java.lang.Exception e) {
+      } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
       }
     }
   }
 
-  @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<Notifikasjon>
-    WRITER$ = (org.apache.avro.io.DatumWriter<Notifikasjon>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter
+    WRITER$ = new org.apache.avro.specific.SpecificDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
     WRITER$.write(this, SpecificData.getEncoder(out));
   }
 
-  @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<Notifikasjon>
-    READER$ = (org.apache.avro.io.DatumReader<Notifikasjon>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader
+    READER$ = new org.apache.avro.specific.SpecificDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.id);
-
-    out.writeString(this.beskjed);
-
-    out.writeString(this.orgnr);
-
-    out.writeString(this.servicecode);
-
-    out.writeInt(this.serviceedition);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
-
-      this.beskjed = in.readString(this.beskjed instanceof Utf8 ? (Utf8)this.beskjed : null);
-
-      this.orgnr = in.readString(this.orgnr instanceof Utf8 ? (Utf8)this.orgnr : null);
-
-      this.servicecode = in.readString(this.servicecode instanceof Utf8 ? (Utf8)this.servicecode : null);
-
-      this.serviceedition = in.readInt();
-
-    } else {
-      for (int i = 0; i < 5; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
-          break;
-
-        case 1:
-          this.beskjed = in.readString(this.beskjed instanceof Utf8 ? (Utf8)this.beskjed : null);
-          break;
-
-        case 2:
-          this.orgnr = in.readString(this.orgnr instanceof Utf8 ? (Utf8)this.orgnr : null);
-          break;
-
-        case 3:
-          this.servicecode = in.readString(this.servicecode instanceof Utf8 ? (Utf8)this.servicecode : null);
-          break;
-
-        case 4:
-          this.serviceedition = in.readInt();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
-
-
-
-
-
-
-
-
-
-

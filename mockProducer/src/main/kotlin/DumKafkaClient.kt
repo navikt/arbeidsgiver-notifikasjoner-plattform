@@ -1,5 +1,4 @@
 import io.confluent.kafka.serializers.KafkaAvroSerializer
-import no.nav.arbeidsgiver.Notifikasjon
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
