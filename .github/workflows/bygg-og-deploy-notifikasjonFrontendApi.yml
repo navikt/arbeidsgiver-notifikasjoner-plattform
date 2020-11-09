@@ -4,6 +4,7 @@ on:
   push:
     branches: ['main']
     paths: ['notifikasjonFrontendApi/**']
+  workflow_dispatch:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
