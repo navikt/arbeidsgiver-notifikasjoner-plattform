@@ -14,3 +14,8 @@ spec:
     path: /readiness
   kafka:
     pool: nav-dev
+  external:
+    - host: nav-dev-kafka-nav-dev.aivencloud.com
+      ports:
+        - port: 26487
+          protocol: TCP
