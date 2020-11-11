@@ -1,4 +1,3 @@
-
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import no.nav.arbeidsgiver.Notifikasjon
 import org.apache.kafka.clients.consumer.KafkaConsumer
@@ -19,7 +18,10 @@ fun lagKafkaConsumer(): KafkaConsumer<String, Notifikasjon> {
     props["security.protocol"] = "SSL"
     val schemaRegistry = URL(System.getenv("KAFKA_SCHEMA_REGISTRY"))
     props["basic.auth.credentials.source"] = "USER_INFO"
-    props["basic.auth.user.info"] = schemaRegistry.userInfo
+    val schemausr = System.getenv("KAFKA_SCHEMA_REGISTRY_USER")
+    val schemapass = System.getenv("KAFKA_SCHEMA_REGISTRY_PASSWORD")
+    val schemaregusrinfo = "$schemausr:$schemapass"
+    props["basic.auth.user.info"] = schemaRegistry.userInfo ?: schemaregusrinfo
     props["group.id"] = "notifikasjon-frontend-api"
     props["schema.registry.url"] = URI(
             schemaRegistry.protocol,
