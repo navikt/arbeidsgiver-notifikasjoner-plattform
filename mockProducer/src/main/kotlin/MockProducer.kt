@@ -25,7 +25,7 @@ fun Application.health() {
         }
 
         get("/hello") {
-            send("HEISANN KAFKA!")
+            send("HEISANN KAFKA!!!")
             call.respond(
                 HttpStatusCode.OK,
                 "Melding puttet på kafka"
