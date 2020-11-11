@@ -1,3 +1,4 @@
+
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import no.nav.arbeidsgiver.Notifikasjon
 import org.apache.kafka.clients.consumer.KafkaConsumer

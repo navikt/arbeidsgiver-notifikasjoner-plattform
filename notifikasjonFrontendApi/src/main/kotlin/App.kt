@@ -28,7 +28,7 @@ fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
         val config = DataSourceBuilder(System.getenv())
         config.migrate()
         thread(start = true) {
-            lesFraKafka();
+            lesFraKafka()
         }
         embeddedServer(
                 Netty,
