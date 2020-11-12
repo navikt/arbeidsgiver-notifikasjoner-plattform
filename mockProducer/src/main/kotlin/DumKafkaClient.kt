@@ -22,7 +22,10 @@ private fun createProducer(): Producer<String, Notifikasjon> {
 
     val schemaRegistry = URL(System.getenv("KAFKA_SCHEMA_REGISTRY"))
     props["basic.auth.credentials.source"] = "USER_INFO"
-    props["basic.auth.user.info"] = schemaRegistry.userInfo
+    val schemausr = System.getenv("KAFKA_SCHEMA_REGISTRY_USER")
+    val schemapass = System.getenv("KAFKA_SCHEMA_REGISTRY_PASSWORD")
+    val schemaregusrinfo = "$schemausr:$schemapass"
+    props["basic.auth.user.info"] = schemaRegistry.userInfo ?: schemaregusrinfo
     props["schema.registry.url"] = URI(
         schemaRegistry.protocol,
         null,
