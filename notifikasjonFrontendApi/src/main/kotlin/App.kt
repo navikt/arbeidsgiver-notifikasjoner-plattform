@@ -36,7 +36,7 @@ fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
                 module = Application::health
         ).start(wait = true)
     } catch (e: Exception) {
-        logger.error("uhåndtert exception", e)
+        logger.error("uhåndtert exception: ", e)
     }
 }
 
