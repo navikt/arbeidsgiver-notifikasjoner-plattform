@@ -55,7 +55,7 @@ object PRODUCER {
         notifikasjon.orgnr="910825526"
         notifikasjon.servicecode="5441"
         notifikasjon.serviceedition=1
-        notifikasjon.beskjed="msg"
+        notifikasjon.beskjed=msg
         logger.info("send({}): producer={}", msg, producer)
         producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon",notifikasjon.id.toString(), notifikasjon))
 
