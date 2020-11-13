@@ -33,7 +33,6 @@ fun lagKafkaConsumer(): KafkaConsumer<String, Notifikasjon> {
             schemaRegistry.ref
     ).toString()
     return KafkaConsumer(props)
-
 }
 
 

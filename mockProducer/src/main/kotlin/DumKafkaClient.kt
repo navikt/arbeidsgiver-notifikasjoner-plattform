@@ -50,12 +50,12 @@ object PRODUCER {
     }
 
     fun send(msg:String) {
-        val notifikasjon=Notifikasjon()
-        notifikasjon.id=UUID.randomUUID().toString()
-        notifikasjon.orgnr="910825526"
-        notifikasjon.servicecode="5441"
-        notifikasjon.serviceedition=1
-        notifikasjon.beskjed=msg
+        val notifikasjon = Notifikasjon()
+        notifikasjon.id = UUID.randomUUID().toString()
+        notifikasjon.orgnr = "910825526"
+        notifikasjon.servicecode = "5441"
+        notifikasjon.serviceedition = 1
+        notifikasjon.beskjed = msg
         logger.info("send({}): producer={}", msg, producer)
         producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon",notifikasjon.id.toString(), notifikasjon))
 
