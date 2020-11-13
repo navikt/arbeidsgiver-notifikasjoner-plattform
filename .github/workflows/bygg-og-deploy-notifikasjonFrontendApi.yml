@@ -8,8 +8,8 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}-frontendapi
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}-frontendapi:${{ github.sha }}
 
 jobs:
   bygg:
