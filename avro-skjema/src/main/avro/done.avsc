@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "namespace": "no.nav.arbeidsgiver",
+  "name": "Done",
+  "fields": [
+    {
+      "name": "tidspunkt",
+      "type": "long",
+      "logicalType": "timestamp-millis"
+    },
+    {
+      "name": "mottaker",
+      "type": "Mottaker"
+    },
+    {
+      "name": "grupperingsId",
+      "type": "string"
+    }
+  ]
+}

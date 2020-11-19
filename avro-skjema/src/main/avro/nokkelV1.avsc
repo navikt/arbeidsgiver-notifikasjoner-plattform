@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "no.nav.arbeidsgiver",
+  "name": "Nokkel",
+  "fields": [
+    {
+      "name": "systembruker",
+      "type": "string"
+    },
+    {
+      "name": "eventId",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "namespace": "no.nav.arbeidsgiver",
+  "name": "Mottaker",
+  "fields": [
+    {
+      "name": "mottaker",
+      "type": [],
+      "logicalType": "timestamp-millis"
+    },
+    {
+      "name": "fodselsnummer",
+      "type": "string"
+    },
+    {
+      "name": "grupperingsId",
+      "type": "string"
+    }
+  ]
+}

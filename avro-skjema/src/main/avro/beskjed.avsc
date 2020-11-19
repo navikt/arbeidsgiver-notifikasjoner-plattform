@@ -1,0 +1,39 @@
+{
+  "type": "record",
+  "namespace": "no.nav.arbeidsgiver",
+  "name": "Beskjed",
+  "fields": [
+    {
+      "name": "tidspunkt",
+      "type": "long",
+      "logicalType": "timestamp-millis"
+    },
+    {
+      "name": "synligFremTil",
+      "type": ["null", "long"],
+      "logicalType": "timestamp-millis",
+      "default": null
+    },
+    {
+      "name": "fodselsnummer",
+      "type": "string"
+    },
+    {
+      "name": "grupperingsId",
+      "type": "string"
+    },
+    {
+      "name": "tekst",
+      "type": "string"
+    },
+    {
+      "name": "link",
+      "type": "string"
+    },
+    {
+      "name": "sikkerhetsnivaa",
+      "type": "int",
+      "default": 4
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+
+{
+  "type": "record",
+  "namespace": "no.nav.arbeidsgiver",
+  "name": "Oppgave",
+  "fields": [
+    {
+      "name": "tidspunkt",
+      "type": "long",
+      "logicalType": "timestamp-millis"
+    },
+    {
+      "name": "fodselsnummer",
+      "type": "string"
+    },
+    {
+      "name": "grupperingsId",
+      "type": "string"
+    },
+    {
+      "name": "tekst",
+      "type": "string"
+    },
+    {
+      "name": "link",
+      "type": "string"
+    },
+    {
+      "name": "sikkerhetsnivaa",
+      "type": "int",
+      "default": 4
+    }
+  ]
+}
