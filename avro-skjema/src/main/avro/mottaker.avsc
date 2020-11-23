@@ -5,16 +5,32 @@
   "fields": [
     {
       "name": "mottaker",
-      "type": [],
+      "type": [
+        {
+          "type": "record",
+          "namespace": "no.nav.arbeidsgiver",
+          "name": "OrgnrFnr",
+          "fields": [
+            {
+              "name": "mottaker",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "type": "record",
+          "namespace": "no.nav.arbeidsgiver",
+          "name": "orgNrTjeneste",
+          "fields": [
+            {
+              "name": "mottaker",
+              "type": "string",
+            }
+          ]
+        }
+
+      ],
       "logicalType": "timestamp-millis"
-    },
-    {
-      "name": "fodselsnummer",
-      "type": "string"
-    },
-    {
-      "name": "grupperingsId",
-      "type": "string"
     }
   ]
 }
