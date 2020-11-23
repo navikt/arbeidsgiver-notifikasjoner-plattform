@@ -37,6 +37,14 @@
                         </goals>
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
+
+                            <imports>
+                                <import>${project.basedir}/src/main/avro/mottaker.avsc</import>
+                                <import>${project.basedir}/src/main/avro/beskjed.avsc</import>
+                            </imports>
+                            <includes>
+                                <include>*.avsc</include>
+                            </includes>
                             <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                         </configuration>
                     </execution>
