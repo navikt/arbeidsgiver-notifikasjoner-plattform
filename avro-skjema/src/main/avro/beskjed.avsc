@@ -15,8 +15,8 @@
       "default": null
     },
     {
-      "name": "fodselsnummer",
-      "type": "string"
+      "name": "mottaker",
+      "type": "Mottaker"
     },
     {
       "name": "grupperingsId",
@@ -28,12 +28,8 @@
     },
     {
       "name": "link",
-      "type": "string"
-    },
-    {
-      "name": "sikkerhetsnivaa",
-      "type": "int",
-      "default": 4
+      "type": "string",
+      "doc": "Linken brukeren kan klikke på for å få mer informasjon om bedskjeden"
     }
   ]
 }

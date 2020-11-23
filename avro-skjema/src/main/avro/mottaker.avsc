@@ -12,7 +12,11 @@
           "name": "OrgnrFnr",
           "fields": [
             {
-              "name": "mottaker",
+              "name": "orgnr",
+              "type": "string"
+            },
+            {
+              "name": "fnr",
               "type": "string"
             }
           ]
@@ -20,17 +24,23 @@
         {
           "type": "record",
           "namespace": "no.nav.arbeidsgiver",
-          "name": "orgNrTjeneste",
+          "name": "OrgnrAltinnservice",
           "fields": [
             {
-              "name": "mottaker",
-              "type": "string",
+              "name": "orgnr",
+              "type": "string"
+            },
+            {
+              "name": "servicecode",
+              "type": "string"
+            },
+            {
+              "name": "serviceedition",
+              "type": "string"
             }
           ]
         }
-
-      ],
-      "logicalType": "timestamp-millis"
+      ]
     }
   ]
 }

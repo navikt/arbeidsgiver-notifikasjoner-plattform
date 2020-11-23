@@ -4,7 +4,7 @@
   "name": "Nokkel",
   "fields": [
     {
-      "name": "systembruker",
+      "name": "tjenestenavn",
       "type": "string"
     },
     {
