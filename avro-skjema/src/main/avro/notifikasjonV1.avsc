@@ -1,6 +1,6 @@
 {"type": "record",
   "name": "Notifikasjon",
-  "namespace": "no.nav.arbeidsgiver",
+  "namespace": "no.nav.arbeidsgiver.notifikasjon",
   "fields": [
     {"name": "id", "type": "string"},
     {"name": "beskjed", "type": "string"},
