@@ -1,18 +1,17 @@
 import io.confluent.kafka.serializers.KafkaAvroSerializer
-import no.nav.arbeidsgiver.Notifikasjon
+import no.nav.arbeidsgiver.notifikasjon.*
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
-import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
 import java.net.URI
 import java.net.URL
 import java.util.*
 
-private fun createProducer(): Producer<String, Notifikasjon> {
+private fun createProducer(): Producer<Nokkel, Notifikasjon> {
     val props = Properties()
     props["bootstrap.servers"] = System.getenv("KAFKA_BROKERS") ?: ""
-    props["key.serializer"] = StringSerializer::class.java.canonicalName
+    props["key.serializer"] = KafkaAvroSerializer::class.java.canonicalName
     props["value.serializer"] = KafkaAvroSerializer::class.java.canonicalName
     props["ssl.keystore.location"] = System.getenv("KAFKA_KEYSTORE_PATH") ?: ""
     props["ssl.keystore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
@@ -42,7 +41,7 @@ private fun createProducer(): Producer<String, Notifikasjon> {
 object PRODUCER {
     var logger = LoggerFactory.getLogger("PRODUCER")!!
 
-    var producer: Producer<String, Notifikasjon> = try {
+    var producer: Producer<Nokkel, Notifikasjon> = try {
         createProducer()
     } catch (e: Exception) {
         logger.error("Konstruksjon av producer feilet", e)
@@ -50,14 +49,14 @@ object PRODUCER {
     }
 
     fun send(msg:String) {
-        val notifikasjon = Notifikasjon()
-        notifikasjon.id = UUID.randomUUID().toString()
-        notifikasjon.orgnr = "910825526"
-        notifikasjon.servicecode = "5441"
-        notifikasjon.serviceedition = 1
-        notifikasjon.beskjed = msg
+        val beskjed = Beskjed();
+        val notifikasjon = Notifikasjon(beskjed)
+        beskjed.mottaker = Mottaker(OrgnrFnr("111111111", "44444444") )
+        beskjed.tekst = "Hello"
+        beskjed.link = "vg.no"
         logger.info("send({}): producer={}", msg, producer)
-        producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon",notifikasjon.id.toString(), notifikasjon))
+        val nokkel = Nokkel("mockproducer",UUID.randomUUID().toString())
+        producer.send(ProducerRecord("arbeidsgiver.arbeidsgiver-notifikasjon",nokkel, notifikasjon))
 
     }
 }
