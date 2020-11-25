@@ -1,15 +1,16 @@
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
-import no.nav.arbeidsgiver.Notifikasjon
+import no.nav.arbeidsgiver.notifikasjon.Nokkel
+import no.nav.arbeidsgiver.notifikasjon.Notifikasjon
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.serialization.StringDeserializer
 import java.net.URI
 import java.net.URL
 import java.util.*
 
-fun lagKafkaConsumer(): KafkaConsumer<String, Notifikasjon> {
+fun lagKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
     val props = Properties()
     props["bootstrap.servers"] = System.getenv("KAFKA_BROKERS") ?: ""
-    props["key.deserializer"] = StringDeserializer::class.java.canonicalName
+    props["key.deserializer"] = KafkaAvroDeserializer::class.java.canonicalName
     props["value.deserializer"] = KafkaAvroDeserializer::class.java.canonicalName
     props["ssl.keystore.location"] = System.getenv("KAFKA_KEYSTORE_PATH") ?: ""
     props["ssl.keystore.password"] = System.getenv("KAFKA_CREDSTORE_PASSWORD") ?: ""
