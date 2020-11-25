@@ -3,7 +3,8 @@ name: deploy kafkatopic
 on:
   push:
     branches: ['main']
-    paths: ['avro-skjema/**']
+    paths: ['kafka/**']
+  workflow_dispatch:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
