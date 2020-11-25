@@ -3,7 +3,7 @@ name: Bygg og deploy notifikasjonFrontendApi
 on:
   push:
     branches: ['main']
-    paths: ['notifikasjonFrontendApi/**']
+    paths: ['avro-skjema/**']
   workflow_dispatch:
 
 env:
