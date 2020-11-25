@@ -3,7 +3,7 @@ name: Bygg og deploy mockproducer
 on:
   push:
     branches: ['main']
-    paths: ['avro-skjema/**']
+    paths: ['avro-skjema/**', 'mockProducer/**']
   workflow_dispatch:
 
 env:
