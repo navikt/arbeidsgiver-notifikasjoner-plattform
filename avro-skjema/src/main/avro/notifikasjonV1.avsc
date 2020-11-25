@@ -2,10 +2,6 @@
   "name": "Notifikasjon",
   "namespace": "no.nav.arbeidsgiver.notifikasjon",
   "fields": [
-    {"name": "id", "type": "string"},
-    {"name": "beskjed", "type": "string"},
-    {"name": "orgnr", "type": "string"},
-    {"name": "servicecode", "type": "string"},
-    {"name": "serviceedition", "type": "int"}
+    {"name": "notifikasjon", "type": ["Beskjed"]}
   ]
 }

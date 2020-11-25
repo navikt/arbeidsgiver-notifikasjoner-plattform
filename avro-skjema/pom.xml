@@ -61,6 +61,7 @@
                             <imports>
                                 <import>${project.basedir}/src/main/avro/mottaker.avsc</import>
                                 <import>${project.basedir}/src/main/avro/beskjed.avsc</import>
+                                <import>${project.basedir}/src/main/avro/notifikasjonV1.avsc</import>
                             </imports>
                             <includes>
                                 <include>*.avsc</include>
