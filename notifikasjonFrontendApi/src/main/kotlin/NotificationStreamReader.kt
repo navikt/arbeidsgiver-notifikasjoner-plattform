@@ -2,7 +2,6 @@ import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import no.nav.arbeidsgiver.notifikasjon.Nokkel
 import no.nav.arbeidsgiver.notifikasjon.Notifikasjon
 import org.apache.kafka.clients.consumer.KafkaConsumer
-import org.apache.kafka.common.serialization.StringDeserializer
 import java.net.URI
 import java.net.URL
 import java.util.*
