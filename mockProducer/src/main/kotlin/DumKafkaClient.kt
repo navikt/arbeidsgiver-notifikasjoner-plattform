@@ -56,6 +56,6 @@ object PRODUCER {
         beskjed.link = "vg.no"
         logger.info("send({}): producer={}", msg, producer)
         val nokkel = Nokkel("mockproducer",UUID.randomUUID().toString())
-        producer.send(ProducerRecord("arbeidsgiver.notifikasjon",nokkel, notifikasjon))
+        producer.send(ProducerRecord("arbeidsgiver.notifikasjoner",nokkel, notifikasjon))
     }
 }

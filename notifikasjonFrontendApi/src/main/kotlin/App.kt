@@ -13,7 +13,7 @@ val konsument = lagKafkaConsumer();
 
 fun lesFraKafka() {
     val logger = LoggerFactory.getLogger("kafka-leser")!!
-    konsument.subscribe(listOf("arbeidsgiver.notifikasjon"))
+    konsument.subscribe(listOf("arbeidsgiver.notifikasjoner"))
     konsument.poll(Duration.ofMillis(25))
     konsument.seekToBeginning(konsument.assignment())
     while (true) {
