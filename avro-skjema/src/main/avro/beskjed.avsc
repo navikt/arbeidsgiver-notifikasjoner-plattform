@@ -4,27 +4,11 @@
   "name": "Beskjed",
   "fields": [
     {
-      "name": "tidspunkt",
-      "type": "long",
-      "logicalType": "timestamp-millis",
-      "doc": "Tidspunkt for når hendelsen skjedde"
-    },
-    {
       "name": "synligFremTil",
       "type": ["null", "long"],
       "logicalType": "timestamp-millis",
       "default": null,
       "doc": "For hvor lenge beskjeden skal vises. Er den null, så er det ingen begrensning"
-    },
-    {
-      "name": "mottaker",
-      "type": "Mottaker",
-      "doc": "Hvem som skal se beskjeden"
-    },
-    {
-      "name": "grupperingsId",
-      "type": "string",
-      "doc": "Id gitt av produsent av meldingen, som viser tilhørighet mellom notifikasjoner. F.eks. at de omhandler samme søknad."
     },
     {
       "name": "tekst",

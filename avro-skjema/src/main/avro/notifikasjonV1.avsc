@@ -2,6 +2,22 @@
   "name": "Notifikasjon",
   "namespace": "no.nav.arbeidsgiver.notifikasjon",
   "fields": [
-    {"name": "notifikasjon", "type": ["Beskjed"]}
+    {"name": "notifikasjon", "type": ["Beskjed"]},
+    {
+      "name": "mottaker",
+      "type": "Mottaker",
+      "doc": "Hvem som skal se beskjeden"
+    },
+    {
+      "name": "grupperingsId",
+      "type": "string",
+      "doc": "Id gitt av produsent av meldingen, som viser tilhørighet mellom notifikasjoner. F.eks. at de omhandler samme søknad."
+    },
+    {
+      "name": "tidspunkt",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "doc": "Tidspunkt for når hendelsen skjedde"
+    }
   ]
 }
