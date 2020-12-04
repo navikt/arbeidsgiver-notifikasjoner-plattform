@@ -32,10 +32,4 @@ class DataSourceBuilder(val env: Map<String, String>) {
       return HikariDataSource(hikariConfig)
     }
 
-    fun migrate() =
-            Flyway.configure()
-                    .dataSource(getDataSource())
-                    .load()
-                    .migrate()
-
 }

@@ -5,8 +5,11 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import no.nav.arbeidsgiver.notifikasjon.config.DataSourceBuilder
+import no.nav.arbeidsgiver.notifikasjon.config.leggTilNotifikasjon
+import org.flywaydb.core.Flyway
 import org.slf4j.LoggerFactory
 import java.time.Duration
+import javax.sql.DataSource
 import kotlin.concurrent.thread
 
 val konsument = lagKafkaConsumer();
@@ -14,22 +17,32 @@ val konsument = lagKafkaConsumer();
 fun lesFraKafka() {
     val logger = LoggerFactory.getLogger("kafka-leser")!!
     konsument.subscribe(listOf("arbeidsgiver.notifikasjoner"))
-    konsument.poll(Duration.ofMillis(25))
     konsument.seekToBeginning(konsument.assignment())
+
+    val connection = datasource.connection
+
     while (true) {
-        val notifikasjoner = konsument.poll(Duration.ofMillis(1000));
+        val notifikasjoner = konsument.poll(Duration.ofMillis(1_000));
         notifikasjoner.forEach {
             logger.info("mottatt beskjed: {} ", it.value())
-
+            connection.leggTilNotifikasjon(it.key(), it.value())
         }
     }
 }
 
+val datasource = DataSourceBuilder(System.getenv()).getDataSource()
+
+fun migrateDatabase(datasource: DataSource) =
+    Flyway.configure()
+        .dataSource(datasource)
+        .load()
+        .migrate()
+
+
 fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
     val logger = LoggerFactory.getLogger("main")!!
     try {
-        val config = DataSourceBuilder(System.getenv())
-        config.migrate()
+        migrateDatabase(datasource)
         thread(start = true) {
             lesFraKafka()
         }

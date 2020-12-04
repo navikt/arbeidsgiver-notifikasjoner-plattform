@@ -49,13 +49,21 @@ object PRODUCER {
     }
 
     fun send(msg:String) {
-        val beskjed = Beskjed();
-        val notifikasjon = Notifikasjon(beskjed)
-        beskjed.mottaker = Mottaker(OrgnrFnr("111111111", "44444444") )
-        beskjed.tekst = "Hello"
-        beskjed.link = "vg.no"
+        val nokkel = Nokkel("mockproducer", UUID.randomUUID().toString())
+        val notifikasjon = Notifikasjon().apply {
+            mottaker = Mottaker(OrgnrFnr().apply {
+                orgnr = "111111111"
+                fnr = "44444444"
+            })
+            notifikasjon = Beskjed().apply {
+                tekst = "Hello"
+                link = "vg.no"
+            }
+            grupperingsId = "123"
+            tidspunkt = 123
+        }
+
         logger.info("send({}): producer={}", msg, producer)
-        val nokkel = Nokkel("mockproducer",UUID.randomUUID().toString())
-        producer.send(ProducerRecord("arbeidsgiver.notifikasjoner",nokkel, notifikasjon))
+        producer.send(ProducerRecord("arbeidsgiver.notifikasjoner", nokkel, notifikasjon))
     }
 }

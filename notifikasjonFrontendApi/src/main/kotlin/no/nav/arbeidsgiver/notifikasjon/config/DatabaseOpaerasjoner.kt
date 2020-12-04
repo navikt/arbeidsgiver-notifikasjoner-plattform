@@ -5,7 +5,7 @@ import java.sql.Connection
 import javax.sql.DataSource
 
 
-fun Connection.leggTilNotifikasjon (nokkel: Nokkel, notifikasjonWrapper: Notifikasjon){
+fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifikasjon) {
     val prepstat = this.prepareStatement("""
         insert into notifikasjon values (
             tjenestenavn=?, 
@@ -23,9 +23,8 @@ fun Connection.leggTilNotifikasjon (nokkel: Nokkel, notifikasjonWrapper: Notifik
     """)
     prepstat.setString(1, nokkel.tjenestenavn.toString())
     prepstat.setString(2,nokkel.eventId.toString())
-    val notifikasjon = notifikasjonWrapper.notifikasjon
-    val mottaker = notifikasjonWrapper.mottaker.mottaker
-    when (mottaker) {
+
+    when (val mottaker = notifikasjonWrapper.mottaker.mottaker) {
         is OrgnrFnr -> {
             prepstat.setString(3, mottaker.fnr.toString());
             prepstat.setString(4, mottaker.orgnr.toString())
@@ -36,8 +35,9 @@ fun Connection.leggTilNotifikasjon (nokkel: Nokkel, notifikasjonWrapper: Notifik
             prepstat.setString(6, mottaker.serviceedition.toString())
         }
     }
+
     prepstat.setLong(7, notifikasjonWrapper.tidspunkt);
-    when (notifikasjon) {
+    when (val notifikasjon = notifikasjonWrapper.notifikasjon) {
         is Beskjed -> {
             prepstat.setLong(8, notifikasjon.synligFremTil);
             prepstat.setString(9, notifikasjon.tekst.toString());
