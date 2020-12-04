@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <main.class>AppKt</main.class>
+        <main.class>no.nav.arbeidsgiver.notifikasjon.AppKt</main.class>
         <kotlin.version>1.4.0</kotlin.version>
         <ktor.version>1.4.1</ktor.version>
         <junit.version>4.13.1</junit.version>
@@ -28,6 +28,11 @@
             <groupId>io.ktor</groupId>
             <artifactId>ktor-server-netty</artifactId>
             <version>${ktor.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>1.4.2</version>
         </dependency>
 
         <!-- Logging -->
@@ -60,6 +65,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- Kafka -->
         <dependency>
             <groupId>no.nav.arbeidsgiver</groupId>
@@ -76,6 +82,7 @@
             <artifactId>kafka-clients</artifactId>
             <version>2.6.0</version>
         </dependency>
+
         <!-- database -->
         <dependency>
             <groupId>org.flywaydb</groupId>

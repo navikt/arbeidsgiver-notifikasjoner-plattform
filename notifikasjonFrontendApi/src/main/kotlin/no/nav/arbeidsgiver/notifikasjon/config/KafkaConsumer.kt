@@ -5,8 +5,9 @@ import org.apache.kafka.clients.consumer.KafkaConsumer
 import java.net.URI
 import java.net.URL
 import java.util.*
+import kotlin.coroutines.suspendCoroutine
 
-fun lagKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
+suspend fun getKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
     val props = Properties()
     props["bootstrap.servers"] = System.getenv("KAFKA_BROKERS") ?: ""
     props["key.deserializer"] = KafkaAvroDeserializer::class.java.canonicalName
@@ -32,7 +33,11 @@ fun lagKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
             schemaRegistry.query,
             schemaRegistry.ref
     ).toString()
-    return KafkaConsumer(props)
+
+    return suspendCoroutine {
+        KafkaConsumer<Nokkel, Notifikasjon>(props)
+            .also { it.subscribe(listOf("arbeidsgiver.notifikasjoner")) }
+    }
 }
 
 
