@@ -1,3 +1,5 @@
+package no.nav.arbeidsgiver.notifikasjon
+
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
