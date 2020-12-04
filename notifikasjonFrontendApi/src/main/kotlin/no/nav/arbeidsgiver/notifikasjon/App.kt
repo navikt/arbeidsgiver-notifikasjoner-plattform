@@ -8,6 +8,7 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import no.nav.arbeidsgiver.config.getKafkaConsumer
 import no.nav.arbeidsgiver.notifikasjon.config.getDataSource
 import no.nav.arbeidsgiver.notifikasjon.service.kafkaToDatabaseService
 import org.flywaydb.core.Flyway

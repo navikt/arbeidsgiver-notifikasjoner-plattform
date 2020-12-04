@@ -1,3 +1,5 @@
+package no.nav.arbeidsgiver.config
+
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import no.nav.arbeidsgiver.notifikasjon.Nokkel
 import no.nav.arbeidsgiver.notifikasjon.Notifikasjon
