@@ -20,6 +20,7 @@ fun lesFraKafka() {
         val notifikasjoner = konsument.poll(Duration.ofMillis(1000));
         notifikasjoner.forEach {
             logger.info("mottatt beskjed: {} ", it.value())
+
         }
     }
 }
