@@ -10,8 +10,10 @@ spec:
   team: arbeidsgiver
   liveness:
     path: /liveness
+    initialDelay: 20
   readiness:
     path: /readiness
+    initialDelay: 20
   kafka:
     pool: nav-dev
   gcp:
