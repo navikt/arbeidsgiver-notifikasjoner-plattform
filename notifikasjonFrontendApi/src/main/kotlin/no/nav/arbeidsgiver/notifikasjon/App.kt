@@ -16,25 +16,30 @@ import org.slf4j.LoggerFactory
 import javax.sql.DataSource
 import kotlin.concurrent.thread
 
+val logger = LoggerFactory.getLogger("main")!!
+
 suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
-    val logger = LoggerFactory.getLogger("main")!!
     try {
+        logger.info("main startet")
+
+        logger.info("steg: embedded server")
         embeddedServer(
             Netty,
             port = 8080,
             module = Application::health
         ).start()
 
-        val kafkaConsumerJob = GlobalScope.async { getKafkaConsumer() }
 
-        val dataSourceJob = GlobalScope.async {
-            getDataSource(System.getenv())
-                .also { migrateDatabase(it) }
-        }
+        logger.info("steg: kafka consumer ")
+        val kafkaConsumer = getKafkaConsumer()
 
-        val kafkaConsumer = kafkaConsumerJob.await()
-        val dataSource = dataSourceJob.await()
+        logger.info("steg: data source")
+        val dataSource = getDataSource(System.getenv())
 
+        logger.info("steg: migrer data")
+        migrateDatabase(dataSource)
+
+        logger.info("steg: start kafka-til-database service")
         thread(start = true) { kafkaToDatabaseService(kafkaConsumer, dataSource) }
 
         logger.info("All initialisering ferdig")
