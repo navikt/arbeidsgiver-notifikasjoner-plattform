@@ -16,9 +16,6 @@ import org.slf4j.LoggerFactory
 import javax.sql.DataSource
 import kotlin.concurrent.thread
 
-private var serviceAlive = true
-private var serviceReady = false
-
 suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
     val logger = LoggerFactory.getLogger("main")!!
     try {
@@ -31,8 +28,6 @@ suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
 
         val kafkaConsumer = kafkaConsumerJob.await()
         val dataSource = dataSourceJob.await()
-
-        serviceReady = true
 
         thread(start = true) { kafkaToDatabaseService(kafkaConsumer, dataSource) }
 
@@ -55,11 +50,11 @@ private fun migrateDatabase(dataSource: DataSource) =
 fun Application.health() {
     routing {
         get("/liveness") {
-            call.respond(if (serviceAlive) HttpStatusCode.OK else HttpStatusCode.InternalServerError )
+            call.respond(HttpStatusCode.OK)
         }
 
         get("/readiness") {
-            call.respond(if (serviceReady) HttpStatusCode.OK else HttpStatusCode.InternalServerError )
+            call.respond(HttpStatusCode.OK)
         }
 
         get("/hello") {
