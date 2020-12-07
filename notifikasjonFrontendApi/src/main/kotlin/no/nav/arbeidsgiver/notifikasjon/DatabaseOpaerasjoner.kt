@@ -58,8 +58,11 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
         is OrgnrFnr -> {
             prepstat.setString(3, mottaker.fnr.toString())
             prepstat.setString(4, mottaker.orgnr.toString())
+            prepstat.setString(5, null)
+            prepstat.setString(6, null)
         }
         is OrgnrAltinnservice -> {
+            prepstat.setString(3, null)
             prepstat.setString(4, mottaker.orgnr.toString())
             prepstat.setString(5, mottaker.servicecode.toString())
             prepstat.setString(6, mottaker.serviceedition.toString())
@@ -69,12 +72,12 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
     prepstat.setLong(7, notifikasjonWrapper.tidspunkt)
     when (val notifikasjon = notifikasjonWrapper.notifikasjon) {
         is Beskjed -> {
-            val synligFremTil = notifikasjon.synligFremTil
-            if (synligFremTil != null) {
-                prepstat.setLong(8, synligFremTil)
-            }
+            prepstat.setObject( 8, notifikasjon.synligFremTil)
             prepstat.setString(9, notifikasjon.tekst.toString())
             prepstat.setString(10, notifikasjon.link.toString())
+        }
+        else -> {
+            throw RuntimeException("ukjent notifikasjontype")
         }
     }
     prepstat.setString(11, notifikasjonWrapper.grupperingsId.toString())
