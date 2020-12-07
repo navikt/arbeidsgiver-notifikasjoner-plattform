@@ -69,7 +69,10 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
     prepstat.setLong(7, notifikasjonWrapper.tidspunkt)
     when (val notifikasjon = notifikasjonWrapper.notifikasjon) {
         is Beskjed -> {
-            prepstat.setLong(8, notifikasjon.synligFremTil)
+            val synligFremTil = notifikasjon.synligFremTil
+            if (synligFremTil != null) {
+                prepstat.setLong(8, synligFremTil)
+            }
             prepstat.setString(9, notifikasjon.tekst.toString())
             prepstat.setString(10, notifikasjon.link.toString())
         }
