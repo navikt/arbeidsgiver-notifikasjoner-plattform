@@ -36,6 +36,8 @@ suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
         val dataSource = dataSourceJob.await()
 
         thread(start = true) { kafkaToDatabaseService(kafkaConsumer, dataSource) }
+
+        logger.info("All initialisering ferdig")
     } catch (e: Exception) {
         logger.error("uhåndtert exception: ", e)
     }

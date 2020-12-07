@@ -11,19 +11,21 @@ import javax.sql.DataSource
 
 
 fun kafkaToDatabaseService(kafkaConsumer: KafkaConsumer<Nokkel, Notifikasjon>, dataSource: DataSource) {
-    val logger = LoggerFactory.getLogger("kafkaToDatabaseService")!!
+    val log = LoggerFactory.getLogger("kafkaToDatabaseService")!!
+
+    log.info("kafka til database service startet opp")
 
     while (true) {
         val notifikasjoner = kafkaConsumer.poll(Duration.ofMillis(1_000))
 
         dataSource.transaction { connection ->
             notifikasjoner.forEach {
-                logger.info("mottatt beskjed: {} ", it.value())
+                log.info("mottatt beskjed: {} ", it.value())
                 connection.leggTilNotifikasjon(it.key(), it.value())
             }
         }
 
-        logger.info("Overført {} notifikasjoner fra kafka til database", notifikasjoner.count())
+        log.info("Overført {} notifikasjoner fra kafka til database", notifikasjoner.count())
     }
 }
 

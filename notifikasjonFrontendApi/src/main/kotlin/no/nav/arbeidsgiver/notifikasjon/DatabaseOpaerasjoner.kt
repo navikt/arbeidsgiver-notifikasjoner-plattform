@@ -1,7 +1,10 @@
 package no.nav.arbeidsgiver.notifikasjon
 
+import org.slf4j.LoggerFactory
 import java.sql.Connection
 import javax.sql.DataSource
+
+private val log = LoggerFactory.getLogger("DatabaseOperasjoner")
 
 class UnhandeledTransactionRollback(msg: String, e: Throwable) : Exception(msg, e)
 
@@ -32,6 +35,7 @@ fun <T> DataSource.transaction(rollback: (e: Exception) -> T = ::defaultRollback
     }
 
 fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifikasjon) {
+    log.info("Lagrer notifikasjon til database (nøkkel {} {})", nokkel.tjenestenavn, nokkel.eventId)
     val prepstat = this.prepareStatement("""
         insert into notifikasjon values (
             tjenestenavn=?, 
