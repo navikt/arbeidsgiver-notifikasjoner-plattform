@@ -37,22 +37,23 @@ fun <T> DataSource.transaction(rollback: (e: Exception) -> T = ::defaultRollback
 fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifikasjon) {
     log.info("Lagrer notifikasjon til database (nøkkel {} {})", nokkel.tjenestenavn, nokkel.eventId)
     val prepstat = this.prepareStatement("""
-        insert into notifikasjon values (
-            tjenestenavn=?, 
-            eventid=?, 
-            fnr=?, 
-            orgnr=?, 
-            servicecode=?, 
-            serviceedition=?, 
-            tidspunkt=?, 
-            synlig_frem_til=?, 
-            tekst=?, 
-            link=?, 
-            grupperingsid=?
+        INSERT INTO notifikasjon(
+            tjenestenavn,
+            eventid,
+            fnr,
+            orgnr,
+            servicecode,
+            serviceedition,
+            tidspunkt,
+            synlig_frem_til,
+            tekst,
+            link,
+            grupperingsid
         )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """)
     prepstat.setString(1, nokkel.tjenestenavn.toString())
-    prepstat.setString(2,nokkel.eventId.toString())
+    prepstat.setString(2, nokkel.eventId.toString())
 
     when (val mottaker = notifikasjonWrapper.mottaker.mottaker) {
         is OrgnrFnr -> {
