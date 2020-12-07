@@ -36,7 +36,6 @@ suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
         val dataSource = dataSourceJob.await()
 
         thread(start = true) { kafkaToDatabaseService(kafkaConsumer, dataSource) }
-
     } catch (e: Exception) {
         logger.error("uhåndtert exception: ", e)
     }

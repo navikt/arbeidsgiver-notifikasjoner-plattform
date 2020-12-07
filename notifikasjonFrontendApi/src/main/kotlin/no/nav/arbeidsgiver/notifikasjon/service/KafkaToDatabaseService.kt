@@ -22,6 +22,8 @@ fun kafkaToDatabaseService(kafkaConsumer: KafkaConsumer<Nokkel, Notifikasjon>, d
                 connection.leggTilNotifikasjon(it.key(), it.value())
             }
         }
+
+        logger.info("Overført {} notifikasjoner fra kafka til database", notifikasjoner.count())
     }
 }
 
