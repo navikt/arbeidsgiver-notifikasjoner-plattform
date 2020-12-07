@@ -19,6 +19,12 @@ import kotlin.concurrent.thread
 suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
     val logger = LoggerFactory.getLogger("main")!!
     try {
+        embeddedServer(
+            Netty,
+            port = 8080,
+            module = Application::health
+        ).start()
+
         val kafkaConsumerJob = GlobalScope.async { getKafkaConsumer() }
 
         val dataSourceJob = GlobalScope.async {
@@ -31,11 +37,6 @@ suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
 
         thread(start = true) { kafkaToDatabaseService(kafkaConsumer, dataSource) }
 
-        embeddedServer(
-            Netty,
-            port = 8080,
-            module = Application::health
-        ).start(wait = true)
     } catch (e: Exception) {
         logger.error("uhåndtert exception: ", e)
     }
