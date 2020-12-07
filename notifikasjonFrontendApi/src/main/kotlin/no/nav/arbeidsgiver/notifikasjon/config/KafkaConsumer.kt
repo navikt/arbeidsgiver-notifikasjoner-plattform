@@ -25,6 +25,7 @@ fun getKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
     val schemaregusrinfo = "$schemausr:$schemapass"
     props["basic.auth.user.info"] = schemaRegistry.userInfo ?: schemaregusrinfo
     props["group.id"] = "notifikasjon-frontend-api"
+    props["specific.avro.reader"] = "true"
     props["schema.registry.url"] = URI(
             schemaRegistry.protocol,
             null,
