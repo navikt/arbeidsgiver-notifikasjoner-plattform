@@ -4,9 +4,8 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import java.lang.RuntimeException
 import javax.sql.DataSource
-import kotlin.coroutines.suspendCoroutine
 
-suspend fun getDataSource(env: Map<String, String>): DataSource {
+fun getDataSource(env: Map<String, String>): DataSource {
     fun lookup(navn: String): String =
         env["NAIS_DATABASE_NOTIFIKASJON_FRONTEND_API_NOTIFIKASJONER_$navn"]
             ?: throw RuntimeException("Finner ikke env-variabel $navn");
@@ -24,5 +23,5 @@ suspend fun getDataSource(env: Map<String, String>): DataSource {
         initializationFailTimeout = 60_000 /* ms */
     }
 
-    return suspendCoroutine { HikariDataSource(config) }
+    return HikariDataSource(config)
 }

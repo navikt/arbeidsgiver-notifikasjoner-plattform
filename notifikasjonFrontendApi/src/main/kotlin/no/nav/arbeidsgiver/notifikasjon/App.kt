@@ -6,9 +6,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import no.nav.arbeidsgiver.config.getKafkaConsumer
+import no.nav.arbeidsgiver.notifikasjon.config.getKafkaConsumer
 import no.nav.arbeidsgiver.notifikasjon.config.getDataSource
 import no.nav.arbeidsgiver.notifikasjon.service.kafkaToDatabaseService
 import org.flywaydb.core.Flyway
@@ -18,7 +16,7 @@ import kotlin.concurrent.thread
 
 val logger = LoggerFactory.getLogger("main")!!
 
-suspend fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
+fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
     try {
         logger.info("main startet")
 

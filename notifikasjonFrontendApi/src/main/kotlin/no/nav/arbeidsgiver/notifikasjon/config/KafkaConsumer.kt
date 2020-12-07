@@ -1,4 +1,4 @@
-package no.nav.arbeidsgiver.config
+package no.nav.arbeidsgiver.notifikasjon.config
 
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import no.nav.arbeidsgiver.notifikasjon.Nokkel
@@ -7,9 +7,8 @@ import org.apache.kafka.clients.consumer.KafkaConsumer
 import java.net.URI
 import java.net.URL
 import java.util.*
-import kotlin.coroutines.suspendCoroutine
 
-suspend fun getKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
+fun getKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
     val props = Properties()
     props["bootstrap.servers"] = System.getenv("KAFKA_BROKERS") ?: ""
     props["key.deserializer"] = KafkaAvroDeserializer::class.java.canonicalName
@@ -36,10 +35,9 @@ suspend fun getKafkaConsumer(): KafkaConsumer<Nokkel, Notifikasjon> {
             schemaRegistry.ref
     ).toString()
 
-    return suspendCoroutine {
-        KafkaConsumer<Nokkel, Notifikasjon>(props)
-            .also { it.subscribe(listOf("arbeidsgiver.notifikasjoner")) }
-    }
+    val consumer = KafkaConsumer<Nokkel, Notifikasjon>(props)
+    consumer.subscribe(listOf("arbeidsgiver.notifikasjoner"))
+    return consumer
 }
 
 
