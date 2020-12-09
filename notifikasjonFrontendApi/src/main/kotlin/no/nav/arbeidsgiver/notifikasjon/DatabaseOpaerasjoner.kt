@@ -88,10 +88,10 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
 
 typealias DomeneNotifikasjon = no.nav.arbeidsgiver.notifikasjon.model.Notifikasjon
 
-fun ResultSet.forEach(body: () -> Unit) {
+fun ResultSet.forEach(body: (r: ResultSet) -> Unit) {
     this.use {
         while (this.next()) {
-            body()
+            body(this)
         }
     }
 }
@@ -105,20 +105,19 @@ fun Connection.finnNotifikasjon(fnr: String): List<DomeneNotifikasjon> {
 
     prepstat.setString(1, fnr)
     val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf()
-    val resultat = prepstat.executeQuery()
-    resultat.forEach {
+    prepstat.executeQuery().forEach { row ->
         val notifikasjon = DomeneNotifikasjon(
-            tjenestenavn = resultat.getString("tjenestenavn"),
-            eventid = resultat.getString("eventid"),
-            fnr = resultat.getString("fnr"),
-            orgnr = resultat.getString("orgnr"),
-            servicecode = resultat.getString("servicecode"),
-            serviceedition = resultat.getString("serviceedition"),
-            tidspunkt = resultat.getString("tidspunkt"),
-            synlig_frem_til = resultat.getString("synlig_frem_til"),
-            tekst = resultat.getString("tekst"),
-            link = resultat.getString("link"),
-            grupperingsid = resultat.getString("grupperingsid")
+            tjenestenavn = row.getString("tjenestenavn"),
+            eventid = row.getString("eventid"),
+            fnr = row.getString("fnr"),
+            orgnr = row.getString("orgnr"),
+            servicecode = row.getString("servicecode"),
+            serviceedition = row.getString("serviceedition"),
+            tidspunkt = row.getString("tidspunkt"),
+            synlig_frem_til = row.getString("synlig_frem_til"),
+            tekst = row.getString("tekst"),
+            link = row.getString("link"),
+            grupperingsid = row.getString("grupperingsid")
         )
         listeMedNotifikasjoner.add(notifikasjon)
     }
