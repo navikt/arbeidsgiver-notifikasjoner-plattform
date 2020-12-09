@@ -2,6 +2,7 @@ package no.nav.arbeidsgiver.notifikasjon
 
 import org.slf4j.LoggerFactory
 import java.sql.Connection
+import java.sql.ResultSet
 import javax.sql.DataSource
 
 private val log = LoggerFactory.getLogger("DatabaseOperasjoner")
@@ -87,6 +88,14 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
 
 typealias DomeneNotifikasjon = no.nav.arbeidsgiver.notifikasjon.model.Notifikasjon
 
+fun ResultSet.forEach(body: () -> Unit) {
+    this.use {
+        while (this.next()) {
+            body()
+        }
+    }
+}
+
 fun Connection.finnNotifikasjon(fnr: String): List<DomeneNotifikasjon> {
     log.info("henter notifikasjonfnr")
     val prepstat = this.prepareStatement("""
@@ -95,26 +104,23 @@ fun Connection.finnNotifikasjon(fnr: String): List<DomeneNotifikasjon> {
     """)
 
     prepstat.setString(1, fnr)
-    return prepstat.executeQuery()
-        .use { resultat ->
-            val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf()
-
-            while (resultat.next()) {
-                val notifikasjon = DomeneNotifikasjon(
-                    tjenestenavn = resultat.getString("tjenestenavn"),
-                    eventid = resultat.getString("eventid"),
-                    fnr = resultat.getString("fnr"),
-                    orgnr = resultat.getString("orgnr"),
-                    servicecode = resultat.getString("servicecode"),
-                    serviceedition = resultat.getString("serviceedition"),
-                    tidspunkt = resultat.getString("tidspunkt"),
-                    synlig_frem_til = resultat.getString("synlig_frem_til"),
-                    tekst = resultat.getString("tekst"),
-                    link = resultat.getString("link"),
-                    grupperingsid = resultat.getString("grupperingsid")
-                )
-                listeMedNotifikasjoner.add(notifikasjon)
-            }
-            listeMedNotifikasjoner.toList()
-        }
+    val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf()
+    val resultat = prepstat.executeQuery()
+    resultat.forEach {
+        val notifikasjon = DomeneNotifikasjon(
+            tjenestenavn = resultat.getString("tjenestenavn"),
+            eventid = resultat.getString("eventid"),
+            fnr = resultat.getString("fnr"),
+            orgnr = resultat.getString("orgnr"),
+            servicecode = resultat.getString("servicecode"),
+            serviceedition = resultat.getString("serviceedition"),
+            tidspunkt = resultat.getString("tidspunkt"),
+            synlig_frem_til = resultat.getString("synlig_frem_til"),
+            tekst = resultat.getString("tekst"),
+            link = resultat.getString("link"),
+            grupperingsid = resultat.getString("grupperingsid")
+        )
+        listeMedNotifikasjoner.add(notifikasjon)
+    }
+    return listeMedNotifikasjoner.toList()
 }
