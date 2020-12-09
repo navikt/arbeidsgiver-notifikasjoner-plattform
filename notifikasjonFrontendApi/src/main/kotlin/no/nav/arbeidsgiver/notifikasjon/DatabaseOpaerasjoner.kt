@@ -95,26 +95,26 @@ fun Connection.finnNotifikasjon(fnr: String): List<DomeneNotifikasjon> {
     """)
 
     prepstat.setString(1, fnr)
-    val resultat = prepstat.executeQuery()
-    val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf()
-    if (resultat.first()) {
-        do {
-            val notifikasjon = DomeneNotifikasjon(
-                tjenestenavn = resultat.getString("tjenestenavn"),
-                eventid = resultat.getString("eventid"),
-                fnr = resultat.getString("fnr"),
-                orgnr = resultat.getString("orgnr"),
-                servicecode = resultat.getString("servicecode"),
-                serviceedition = resultat.getString("serviceedition"),
-                tidspunkt = resultat.getString("tidspunkt"),
-                synlig_frem_til = resultat.getString("synlig_frem_til"),
-                tekst = resultat.getString("tekst"),
-                link = resultat.getString("link"),
-                grupperingsid = resultat.getString("grupperingsid")
-            )
-            listeMedNotifikasjoner.add(notifikasjon)
+    return prepstat.executeQuery()
+        .use { resultat ->
+            val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf()
 
-        } while (resultat.next())
-    }
-    return listeMedNotifikasjoner.toList()
+            while (resultat.next()) {
+                val notifikasjon = DomeneNotifikasjon(
+                    tjenestenavn = resultat.getString("tjenestenavn"),
+                    eventid = resultat.getString("eventid"),
+                    fnr = resultat.getString("fnr"),
+                    orgnr = resultat.getString("orgnr"),
+                    servicecode = resultat.getString("servicecode"),
+                    serviceedition = resultat.getString("serviceedition"),
+                    tidspunkt = resultat.getString("tidspunkt"),
+                    synlig_frem_til = resultat.getString("synlig_frem_til"),
+                    tekst = resultat.getString("tekst"),
+                    link = resultat.getString("link"),
+                    grupperingsid = resultat.getString("grupperingsid")
+                )
+                listeMedNotifikasjoner.add(notifikasjon)
+            }
+            listeMedNotifikasjoner.toList()
+        }
 }
