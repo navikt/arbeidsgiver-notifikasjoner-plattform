@@ -84,3 +84,15 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
     prepstat.setString(11, notifikasjonWrapper.grupperingsId.toString())
     prepstat.execute()
 }
+
+fun Connection.finnNotifikasjon(fnr: String) {
+    log.info("henter notifikasjonfnr")
+    val prepstat = this.prepareStatement("""
+        SELECT * from notifikasjon
+        WHERE fnr = ?
+    """)
+
+    prepstat.setString(1, fnr)
+    val resultat = prepstat.executeQuery()
+    resultat
+}
