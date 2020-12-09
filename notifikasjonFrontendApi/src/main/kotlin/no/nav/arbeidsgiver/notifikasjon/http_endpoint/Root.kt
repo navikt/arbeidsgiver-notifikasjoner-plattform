@@ -45,7 +45,7 @@ fun root(
                 } else {
                     val dataSource = deferredDataSource.await()
                     val notifikasjoner = dataSource.connection.finnNotifikasjon("44444444")
-                    call.respond(notifikasjoner.toString())
+                    call.respond(notifikasjoner)
                 }
             }
         }
