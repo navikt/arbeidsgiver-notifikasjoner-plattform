@@ -14,8 +14,8 @@ import javax.sql.DataSource
 private val log = LoggerFactory.getLogger("main")!!
 
 fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) =
-    runBlocking(Dispatchers.IO) {
-        try {
+    try {
+        runBlocking(Dispatchers.IO) {
             log.info("main startet")
 
             log.info("steg: kafka consumer ")
@@ -40,7 +40,7 @@ fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) =
 
             fun isAlive(): Boolean =
                 kafkaToDatabaseJob.isActive
-                /* sjekke at database, kafka, webserver kjører */
+            /* sjekke at database, kafka, webserver kjører */
 
             log.info("steg: embedded server")
             embeddedServer(
@@ -54,9 +54,9 @@ fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) =
             ).start()
 
             log.info("All initialisering ferdig")
-        } catch (e: Exception) {
-            log.error("uhåndtert exception", e)
         }
+    } catch (e: Exception) {
+        log.error("uhåndtert exception", e)
     }
 
 private fun migrateDatabase(dataSource: DataSource) =
