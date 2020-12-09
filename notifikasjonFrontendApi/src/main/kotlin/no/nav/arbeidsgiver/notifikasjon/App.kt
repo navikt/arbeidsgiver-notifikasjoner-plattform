@@ -1,50 +1,63 @@
 package no.nav.arbeidsgiver.notifikasjon
 
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import no.nav.arbeidsgiver.notifikasjon.config.getKafkaConsumer
+import kotlinx.coroutines.*
 import no.nav.arbeidsgiver.notifikasjon.config.getDataSource
+import no.nav.arbeidsgiver.notifikasjon.config.getKafkaConsumer
+import no.nav.arbeidsgiver.notifikasjon.http_endpoint.root
 import no.nav.arbeidsgiver.notifikasjon.service.kafkaToDatabaseService
 import org.flywaydb.core.Flyway
 import org.slf4j.LoggerFactory
 import javax.sql.DataSource
-import kotlin.concurrent.thread
 
-val logger = LoggerFactory.getLogger("main")!!
+private val log = LoggerFactory.getLogger("main")!!
 
-fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
-    try {
-        logger.info("main startet")
+fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) =
+    runBlocking(Dispatchers.IO) {
+        try {
+            log.info("main startet")
 
-        logger.info("steg: embedded server")
-        embeddedServer(
-            Netty,
-            port = 8080,
-            module = Application::health
-        ).start()
+            log.info("steg: kafka consumer ")
+            val kafkaConsumer = async {
+                getKafkaConsumer()
+            }
 
+            log.info("steg: data source")
+            val dataSource = async {
+                getDataSource(System.getenv())
+                    .also(::migrateDatabase)
+            }
 
-        logger.info("steg: kafka consumer ")
-        val kafkaConsumer = getKafkaConsumer()
+            val kafkaToDatabaseJob = launch {
+                kafkaToDatabaseService(kafkaConsumer.await(), dataSource.await())
+            }
 
-        logger.info("steg: data source")
-        val dataSource = getDataSource(System.getenv())
+            fun isReady(): Boolean =
+                kafkaConsumer.isCompleted
+                        && dataSource.isCompleted
+                        && kafkaToDatabaseJob.isActive
 
-        logger.info("steg: migrer data")
-        migrateDatabase(dataSource)
+            fun isAlive(): Boolean =
+                kafkaToDatabaseJob.isActive
+                /* sjekke at database, kafka, webserver kjører */
 
-        logger.info("steg: start kafka-til-database service")
-        thread(start = true) { kafkaToDatabaseService(kafkaConsumer, dataSource) }
+            log.info("steg: embedded server")
+            embeddedServer(
+                Netty,
+                port = 8080,
+                module = root(
+                    isReady = ::isReady,
+                    isAlive = ::isAlive,
+                    deferredDataSource = dataSource
+                )
+            ).start()
 
-        logger.info("All initialisering ferdig")
-    } catch (e: Exception) {
-        logger.error("uhåndtert exception: ", e)
+            log.info("All initialisering ferdig")
+        } catch (e: Exception) {
+            log.error("uhåndtert exception", e)
+        }
     }
-}
 
 private fun migrateDatabase(dataSource: DataSource) =
     Flyway.configure()
@@ -52,17 +65,3 @@ private fun migrateDatabase(dataSource: DataSource) =
         .load()
         .migrate()
 
-fun Application.health() {
-    routing {
-        get("/liveness") {
-            call.respond(HttpStatusCode.OK)
-        }
-
-        get("/readiness") {
-            call.respond(HttpStatusCode.OK)
-        }
-
-        get("/hello") {
-        }
-    }
-}
