@@ -86,6 +86,7 @@ fun Connection.leggTilNotifikasjon(nokkel: Nokkel, notifikasjonWrapper: Notifika
 }
 
 typealias DomeneNotifikasjon = no.nav.arbeidsgiver.notifikasjon.model.Notifikasjon
+
 fun Connection.finnNotifikasjon(fnr: String): List<DomeneNotifikasjon> {
     log.info("henter notifikasjonfnr")
     val prepstat = this.prepareStatement("""
@@ -94,24 +95,23 @@ fun Connection.finnNotifikasjon(fnr: String): List<DomeneNotifikasjon> {
     """)
 
     prepstat.setString(1, fnr)
-    val resultat = prepstat.executeQuery();
-    resultat.getString("tekst")
-    val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf();
+    val resultat = prepstat.executeQuery()
+    val listeMedNotifikasjoner: MutableList<DomeneNotifikasjon> = mutableListOf()
     if (resultat.first()) {
         do {
             val notifikasjon = DomeneNotifikasjon(
-                    tjenestenavn = resultat.getString("tjenestenavn"),
-                    eventid = resultat.getString("eventid"),
-                    fnr = resultat.getString("fnr"),
-                    orgnr = resultat.getString("orgnr"),
-                    servicecode = resultat.getString("servicecode"),
-                    serviceedition = resultat.getString("serviceedition"),
-                    tidspunkt = resultat.getString("tidspunkt"),
-                    synlig_frem_til = resultat.getString("synlig_frem_til"),
-                    tekst = resultat.getString("tekst"),
-                    link = resultat.getString("link"),
-                    grupperingsid = resultat.getString("grupperingsid")
-                )
+                tjenestenavn = resultat.getString("tjenestenavn"),
+                eventid = resultat.getString("eventid"),
+                fnr = resultat.getString("fnr"),
+                orgnr = resultat.getString("orgnr"),
+                servicecode = resultat.getString("servicecode"),
+                serviceedition = resultat.getString("serviceedition"),
+                tidspunkt = resultat.getString("tidspunkt"),
+                synlig_frem_til = resultat.getString("synlig_frem_til"),
+                tekst = resultat.getString("tekst"),
+                link = resultat.getString("link"),
+                grupperingsid = resultat.getString("grupperingsid")
+            )
             listeMedNotifikasjoner.add(notifikasjon)
 
         } while (resultat.next())

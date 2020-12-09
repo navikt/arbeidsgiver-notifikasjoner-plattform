@@ -6,6 +6,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.*
 import kotlinx.coroutines.Deferred
+import no.nav.arbeidsgiver.notifikasjon.finnNotifikasjon
 import javax.sql.DataSource
 
 private val dataSourceKey = AttributeKey<DataSource>("dataSource")
@@ -29,11 +30,12 @@ fun root(
             }
 
             get("/notifikasjoner") {
-                if (!deferredDataSource.isCancelled) {
+                if (!deferredDataSource.isCompleted) {
                     call.respond(HttpStatusCode.ServiceUnavailable)
                 } else {
                     val dataSource = deferredDataSource.await()
-                    call.respond(deferredDataSource.isCompleted.asHttpStatusCode())
+                    val notifikasjoner = dataSource.connection.finnNotifikasjon("44444444")
+                    call.respond(notifikasjoner.toString())
                 }
             }
         }
