@@ -100,10 +100,9 @@
             <version>42.2.18</version>
         </dependency>
         <dependency>
-            <groupId>no.nav.arbeidsgiver</groupId>
-            <artifactId>NotifikasjonSchema</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>${ktor.version}</version>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-jackson</artifactId>
         </dependency>
     </dependencies>
 

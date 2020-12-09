@@ -1,7 +1,10 @@
 package no.nav.arbeidsgiver.notifikasjon.http_endpoint
 
+import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
+import io.ktor.features.*
 import io.ktor.http.*
+import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.*
@@ -20,6 +23,13 @@ fun root(
     deferredDataSource: Deferred<DataSource>
 ): Application.() -> Unit =
     fun Application.() {
+        install(ContentNegotiation) {
+            jackson {
+                enable(SerializationFeature.INDENT_OUTPUT)
+
+                // Configure Jackson's ObjectMapper here
+            }
+        }
         routing {
             get("/liveness") {
                 call.respond(isAlive().asHttpStatusCode())
