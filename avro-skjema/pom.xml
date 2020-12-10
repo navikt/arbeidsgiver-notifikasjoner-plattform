@@ -3,24 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>no.nav.arbeidsgiver</groupId>
-    <artifactId>NotifikasjonSchema</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>NotifikasjonSchema</name>
+    <parent>
+        <groupId>no.nav.arbeidsgiver.notifikasjoner</groupId>
+        <artifactId>parent</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>avro-skjema</artifactId>
+    <name>avro-skjema</name>
     <description>Arbeidsgiver - Avro schema for notifikasjoner på Kafka</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro</artifactId>
-            <version>1.10.0</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
@@ -58,6 +49,8 @@
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
 
+                            <stringType>String</stringType>
+
                             <imports>
                                 <import>${project.basedir}/src/main/avro/mottaker.avsc</import>
                                 <import>${project.basedir}/src/main/avro/beskjed.avsc</import>
@@ -73,12 +66,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>3.8.1</version>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

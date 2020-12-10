@@ -1,15 +1,8 @@
 {
   "type": "record",
-  "namespace": "no.nav.arbeidsgiver.notifikasjon",
+  "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
   "name": "Beskjed",
   "fields": [
-    {
-      "name": "synligFremTil",
-      "type": ["null", "long"],
-      "logicalType": "timestamp-millis",
-      "default": null,
-      "doc": "For hvor lenge beskjeden skal vises. Er den null, så er det ingen begrensning"
-    },
     {
       "name": "tekst",
       "type": "string",
@@ -18,7 +11,7 @@
     {
       "name": "link",
       "type": "string",
-      "doc": "Linken brukeren kan klikke på for å få mer informasjon om bedskjeden"
+      "doc": "Linken brukeren kan klikke på for å få mer informasjon om beskjeden"
     }
   ]
 }

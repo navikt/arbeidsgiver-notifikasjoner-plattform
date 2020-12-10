@@ -1,6 +1,6 @@
 {"type": "record",
   "name": "Notifikasjon",
-  "namespace": "no.nav.arbeidsgiver.notifikasjon",
+  "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
   "fields": [
     {"name": "notifikasjon", "type": ["Beskjed"]},
     {
@@ -18,6 +18,13 @@
       "type": "long",
       "logicalType": "timestamp-millis",
       "doc": "Tidspunkt for når hendelsen skjedde"
+    },
+    {
+      "name": "synligFremTil",
+      "type": ["null", "long"],
+      "logicalType": "timestamp-millis",
+      "default": null,
+      "doc": "For hvor lenge beskjeden skal vises. Er den null, så er det ingen begrensning"
     }
   ]
 }

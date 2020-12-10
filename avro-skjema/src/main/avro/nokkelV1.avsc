@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "no.nav.arbeidsgiver.notifikasjon",
+  "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
   "name": "Nokkel",
   "fields": [
     {

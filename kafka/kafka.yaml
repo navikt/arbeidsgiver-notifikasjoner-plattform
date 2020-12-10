@@ -2,7 +2,6 @@ apiVersion: kafka.nais.io/v1
 kind: Topic
 metadata:
   name: notifikasjoner
-  annotations:
   namespace: arbeidsgiver
   labels:
     team: arbeidsgiver
@@ -14,8 +13,8 @@ spec:
     retentionHours: -1
   acl:
     - team: arbeidsgiver
-      application: mockproducer
+      application: notifikasjoner-mock-producer
       access: readwrite
     - team: arbeidsgiver
-      application: notifikasjon-frontend-api
+      application: notifikasjoner-database-importer
       access: read

@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "no.nav.arbeidsgiver.notifikasjon",
+  "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
   "name": "Mottaker",
   "fields": [
     {
@@ -8,7 +8,7 @@
       "type": [
         {
           "type": "record",
-          "namespace": "no.nav.arbeidsgiver.notifikasjon",
+          "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
           "name": "OrgnrFnr",
           "doc": "Mottas av dem med gitt fnr i konteksten av et bestemt orgnr",
           "fields": [
@@ -24,7 +24,7 @@
         },
         {
           "type": "record",
-          "namespace": "no.nav.arbeidsgiver.notifikasjon",
+          "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
           "name": "OrgnrAltinnservice",
           "doc": "Mottas av alle som har tilgang til altinn-tjenesten i det gitte orgnr",
           "fields": [

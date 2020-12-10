@@ -1,20 +1,7 @@
 {
   "type": "record",
-  "namespace": "no.nav.arbeidsgiver.notifikasjon",
+  "namespace": "no.nav.arbeidsgiver.notifikasjoner.skjema",
   "name": "Done",
   "fields": [
-    {
-      "name": "tidspunkt",
-      "type": "long",
-      "logicalType": "timestamp-millis"
-    },
-    {
-      "name": "mottaker",
-      "type": "Mottaker"
-    },
-    {
-      "name": "grupperingsId",
-      "type": "string"
-    }
   ]
 }

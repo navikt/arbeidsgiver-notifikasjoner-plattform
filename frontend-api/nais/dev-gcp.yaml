@@ -1,0 +1,22 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: notifikasjoner-frontend-api
+  namespace: arbeidsgiver
+  labels:
+    team: arbeidsgiver
+    notifikasjoner: ja
+spec:
+  image: {{ image }}
+  team: arbeidsgiver
+  liveness:
+    path: /liveness
+  readiness:
+    path: /readiness
+  gcp:
+    sqlInstances:
+      - name: notifikasjoner
+        type: POSTGRES_11
+        databases:
+          - name: notifikasjoner
+            envVarPrefix: DB_NOTIFIKASJONER
