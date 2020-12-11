@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource
 import no.nav.arbeidsgiver.notifikasjoner.model.Notifikasjon
 import org.flywaydb.core.Flyway
 import org.slf4j.LoggerFactory
+import java.sql.Connection
 import javax.sql.DataSource
 
 private val log = LoggerFactory.getLogger("DatabaseOperasjoner")
@@ -65,7 +66,75 @@ class NotifikasjonslagerDatabase(
             resultSet.close()
             connection.close()
         }
+
+    override fun leggTilNotifikasjoner(notifikasjoner: Sequence<Notifikasjon>) {
+        dataSource.transaction { connection ->
+            notifikasjoner.forEach {
+                connection.leggTilNotifikasjon(it)
+            }
+        }
+    }
+
+    private fun Connection.leggTilNotifikasjon(notifikasjon: Notifikasjon) {
+        log.info("Lagrer notifikasjon til database (nøkkel {} {})", notifikasjon.tjenestenavn, notifikasjon.eventid)
+        val prepstat = this.prepareStatement("""
+            INSERT INTO notifikasjon(
+                tjenestenavn,
+                eventid,
+                fnr,
+                orgnr,
+                servicecode,
+                serviceedition,
+                tidspunkt,
+                synlig_frem_til,
+                tekst,
+                link,
+                grupperingsid
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """)
+        prepstat.setString(1, notifikasjon.tjenestenavn)
+        prepstat.setString(2, notifikasjon.eventid)
+        prepstat.setString(3, notifikasjon.fnr)
+        prepstat.setString(4, notifikasjon.orgnr)
+        prepstat.setString(5, notifikasjon.servicecode)
+        prepstat.setString(6, notifikasjon.serviceedition)
+        prepstat.setLong(7, notifikasjon.tidspunkt.toLong())
+        prepstat.setObject( 8, notifikasjon.synlig_frem_til)
+        prepstat.setString(9, notifikasjon.tekst)
+        prepstat.setString(10, notifikasjon.link)
+        prepstat.setString(11, notifikasjon.grupperingsid)
+        prepstat.execute()
+    }
+
 }
 
+class UnhandeledTransactionRollback(msg: String, e: Throwable) : Exception(msg, e)
+
+private fun <T>defaultRollback(e: Exception): T {
+    throw UnhandeledTransactionRollback("no rollback function registered", e)
+}
+
+private fun <T> Connection.transaction(rollback: (e: Exception) -> T = ::defaultRollback, body: () -> T): T {
+    val savedAutoCommit = autoCommit
+    autoCommit = false
+
+    return try {
+        val result = body()
+        commit()
+        result
+    } catch (e: Exception) {
+        rollback(e)
+    } finally {
+        autoCommit = savedAutoCommit
+    }
+}
+
+private fun <T> DataSource.transaction(rollback: (e: Exception) -> T = ::defaultRollback, body: (c: Connection) -> T): T =
+    connection.use { c ->
+        c.transaction(rollback) {
+            body(c)
+        }
+    }
 
 

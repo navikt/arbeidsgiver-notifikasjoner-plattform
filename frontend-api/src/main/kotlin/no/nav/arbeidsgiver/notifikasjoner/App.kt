@@ -1,5 +1,6 @@
 package no.nav.arbeidsgiver.notifikasjoner
 
+import no.nav.arbeidsgiver.notifikasjoner.kafkastrøm.NotifikasjonsstrømKafka
 import no.nav.arbeidsgiver.notifikasjoner.persistence.Notifikasjonslager
 import no.nav.arbeidsgiver.notifikasjoner.persistence.NotifikasjonslagerDatabase
 import org.slf4j.LoggerFactory
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory
 fun main(@Suppress("UNUSED_PARAMETER") args: Array<String>) {
     LoggerFactory.getLogger("main").info("env: {}", System.getenv().keys.joinToString(", "))
     startServer(
+        lagNotifikasjonsstrøm = ::NotifikasjonsstrømKafka,
         lagNotifikasjonslager = ::lagNotifikasjonslager
     )
 }

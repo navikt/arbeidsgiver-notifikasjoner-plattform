@@ -13,9 +13,11 @@ spec:
     path: /liveness
   readiness:
     path: /readiness
+  kafka:
+    pool: nav-dev
   gcp:
     sqlInstances:
-      - name: notifikasjoner
+      - name: notifikasjoner-frontend-api-2
         type: POSTGRES_11
         databases:
           - name: notifikasjoner

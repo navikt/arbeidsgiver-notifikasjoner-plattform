@@ -16,5 +16,5 @@ spec:
       application: notifikasjoner-mock-producer
       access: readwrite
     - team: arbeidsgiver
-      application: notifikasjoner-database-importer
+      application: notifikasjoner-frontend-api
       access: read

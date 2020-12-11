@@ -10,4 +10,8 @@ class NotifikasjonslagerInMemory : Notifikasjonslager {
         notifikasjoner
             .filter { it.fnr == fnr }
             .asSequence()
+
+    override fun leggTilNotifikasjoner(notifikasjoner: Sequence<Notifikasjon>) {
+        this.notifikasjoner.addAll(notifikasjoner)
+    }
 }

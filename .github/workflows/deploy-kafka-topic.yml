@@ -1,4 +1,4 @@
-name: deploy kafkatopic
+name: deploy kafka topic
 
 on:
   push:

@@ -9,11 +9,10 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>avro-skjema</module>
         <module>felles-kode</module>
         <module>mock-producer</module>
         <module>frontend-api</module>
-        <module>database-importer</module>
-        <module>avro-skjema</module>
     </modules>
 
     <properties>
